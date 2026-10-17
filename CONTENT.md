@@ -35,7 +35,7 @@ To drop in the book's exact text:
 
 ## Current placeholders
 
-Chapters 1 through 5 currently use draft reflection questions, assessment questions and action steps written from the themes. Chapter 5 (Grace) also has a draft story summary.
+Reflection questions for the prologue and chapters 1 through 5 are the book's text. Chapters 1 through 5 still use draft assessment questions and action steps written from the themes, so they keep `placeholder: true` until those are replaced. Chapter 5 (Grace) also has a draft story summary.
 
 ## Writing rule
 
