@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Breaking Point Accountability Coach</title>
+  <meta name="description" content="A free companion to the book Breaking Point Leadership by LaDerek Green. Find your leadership breaking point and build and keep a 90-day development plan.">
+  <meta name="theme-color" content="#1f2a37">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#app">Skip to content</a>
+  <header class="topbar">
+    <a class="brand" href="#/home" aria-label="Home">
+      <span class="brand-mark" aria-hidden="true">BP</span>
+      <span class="brand-text">Accountability Coach</span>
+    </a>
+    <nav class="topnav" aria-label="Main">
+      <a href="#/home" data-nav="home">Home</a>
+      <a href="#/chapters" data-nav="chapters">Chapters</a>
+      <a href="#/log" data-nav="log">Log</a>
+      <a href="#/checkin" data-nav="checkin">Check-In</a>
+      <a href="#/tools" data-nav="tools">Tools</a>
+    </nav>
+  </header>
+
+  <div id="storage-warning" class="banner warn" hidden>
+    Your browser is not letting this app save to your device. Your work will be lost when you close this page. Use Tools, then Download backup, before you leave.
+  </div>
+
+  <main id="app" tabindex="-1"></main>
+
+  <nav class="bottomnav" aria-label="Main">
+    <a href="#/home" data-nav="home"><span aria-hidden="true">&#8962;</span>Home</a>
+    <a href="#/chapters" data-nav="chapters"><span aria-hidden="true">&#9776;</span>Chapters</a>
+    <a href="#/log" data-nav="log"><span aria-hidden="true">&#9998;</span>Log</a>
+    <a href="#/checkin" data-nav="checkin"><span aria-hidden="true">&#10003;</span>Check-In</a>
+    <a href="#/tools" data-nav="tools"><span aria-hidden="true">&#9881;</span>Tools</a>
+  </nav>
+
+  <div id="print-report" class="print-only" aria-hidden="true"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <input type="file" id="restore-input" accept="application/json,.json" hidden>
+
+  <script src="content.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
