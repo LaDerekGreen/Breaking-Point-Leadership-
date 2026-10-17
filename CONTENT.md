@@ -33,6 +33,10 @@ To drop in the book's exact text:
 
 **Apostrophes:** text is wrapped in single quotes, so write an apostrophe as `\'` (for example `'Devon\'s openness'`), or wrap that text in double quotes instead.
 
+## Closing reflection
+
+`closing` in `content.js` holds the reflection questions that come after Chapter 5. It shows as the last card on the Chapters screen. The questions are the book's text; the `title`, `label` and `summary` are drafts. Rename them to match the book and set `placeholder: false`.
+
 ## Current placeholders
 
 Reflection questions for the prologue and chapters 1 through 5 are the book's text. Chapters 1 through 5 still use draft assessment questions and action steps written from the themes, so they keep `placeholder: true` until those are replaced. Chapter 5 (Grace) also has a draft story summary.

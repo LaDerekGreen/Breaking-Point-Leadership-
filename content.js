@@ -65,6 +65,26 @@ window.BPAC_CONTENT = {
   },
 
   /*
+    Closing reflection. Comes after Chapter 5 and mirrors the prologue:
+    the reader looks back across all five breaking points, upward to their
+    own leader and at who would tell them they had stopped leading.
+    LaDerek: rename title or label to match the book, then set
+    placeholder to false.
+  */
+  closing: {
+    title: 'Closing Reflection',
+    label: 'Closing',
+    summary: 'After the five breaking points, look up and around: at your own leader, at what you carry for others and at who would tell you the truth when the pressure is on you.',
+    reflectionQuestions: [
+      'If my own leader went quiet tomorrow, what do I know about their fears and wants that would help me bring them back?',
+      'What am I carrying right now that belongs to someone with more authority than I have, and have I said so?',
+      'When was the last time I stood in a room as someone else\'s shield, and what did it cost me afterward?',
+      'If I were the one under pressure, who on my team knows me well enough to tell me I had stopped leading?'
+    ],
+    placeholder: true
+  },
+
+  /*
     Chapter modules. LaDerek: replace the reflection questions and action
     step with the exact text from the book, then set placeholder to false.
   */

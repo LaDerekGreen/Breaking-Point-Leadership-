@@ -35,6 +35,7 @@
         savedAt: null
       },
       chapters: {},
+      closing: { reflections: {} },
       plan: null,
       pastPlans: [],
       log: [],
@@ -791,6 +792,21 @@
       html += '<h2 class="section-title">Other chapters</h2>';
     }
     html += order.others.map(function (c) { return chapterCard(c, false); }).join('');
+    var answered = C.closing.reflectionQuestions.filter(function (q, i) { return has(state.closing.reflections['q' + i]); }).length;
+    html += '<a class="chapter-card prologue-card" href="#/closing"><div class="ch-num">C</div><div class="ch-body"><h3>' + esc(C.closing.title) + '</h3><p class="muted small">' + esc(C.closing.label) + ' &middot; After Chapter 5</p><p class="small">' +
+      (answered ? answered + ' of ' + C.closing.reflectionQuestions.length + ' questions answered.' : 'Finish here once you have worked through the chapters.') + '</p></div></a>';
+    return html;
+  }
+
+  /* Closing reflection */
+  function viewClosing() {
+    var K = C.closing;
+    var html = pageHead(K.label, K.title, 'Answer honestly. Short answers are fine. Your answers are saved on this device and included in your report.');
+    if (K.placeholder) html += '<p class="note small">Draft content. The questions are from the book; the title and introduction will be updated.</p>';
+    html += '<section class="card story"><p class="story-text">' + esc(K.summary) + '</p></section>';
+    html += '<section class="card"><h2>Reflection</h2>' +
+      K.reflectionQuestions.map(function (q, i) { return field(q, 'closing.reflections.q' + i, { rows: 3 }); }).join('') + '</section>';
+    html += nextLink('#/chapters', 'Back to chapters');
     return html;
   }
 
@@ -1102,6 +1118,12 @@
     });
     if (!any) r += '<p>No chapter summaries saved yet.</p>';
 
+    var closingAnswers = C.closing.reflectionQuestions.map(function (q, i) {
+      var a = state.closing.reflections['q' + i];
+      return has(a) ? '<p><strong>' + esc(q) + '</strong><br>' + nl2br(a) + '</p>' : '';
+    }).join('');
+    if (closingAnswers) r += '<h2>' + esc(C.closing.title) + '</h2><div class="entry">' + closingAnswers + '</div>';
+
     if (state.reviews.length) r += '<h2>Plan reviews</h2>' + state.reviews.map(function (v) { return '<div class="entry"><h3>' + esc(fmtDate(v.date)) + ', day ' + v.day + '</h3><div>' + nl2br(v.text) + '</div></div>'; }).join('');
     return r;
   }
@@ -1389,6 +1411,7 @@
       case 'start': html = viewPrologue(r.a); break;
       case 'chapters': html = viewChapters(); break;
       case 'chapter': html = viewChapter(r.a, r.b); break;
+      case 'closing': html = viewClosing(); break;
       case 'plan': html = viewPlan(); break;
       case 'log': html = r.a === 'new' ? viewLogForm(null) : r.a === 'edit' ? viewLogForm(r.b) : viewLog(); break;
       case 'checkin': html = viewCheckin(r.a); break;
@@ -1396,7 +1419,7 @@
       default: html = viewNotFound();
     }
     app.innerHTML = html;
-    var navKey = { start: 'chapters', chapter: 'chapters', plan: 'home' }[r.name] || r.name;
+    var navKey = { start: 'chapters', chapter: 'chapters', closing: 'chapters', plan: 'home' }[r.name] || r.name;
     document.querySelectorAll('[data-nav]').forEach(function (a) {
       if (a.dataset.nav === navKey) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
