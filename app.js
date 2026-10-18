@@ -741,7 +741,8 @@
     }
 
     if (step === 'decisions') {
-      html += '<section class="card"><h2>Decisions you regret</h2><p>Describe up to ' + MAX_REGRETS + ' leadership decisions you regret. Be specific about the week, the pressure and the cost. Describe people by role, never by name.</p></section>';
+      html += '<section class="card"><h2>Decisions you regret</h2><p>Describe up to ' + MAX_REGRETS + ' leadership decisions you regret. Be specific about the week, the pressure and the cost. Describe people by role, never by name.</p>' +
+        (P.actionStep ? '<div class="callout"><p class="kicker">The book\'s action step</p><p>' + esc(P.actionStep) + '</p></div>' : '') + '</section>';
       p.decisions.forEach(function (d, i) {
         html += '<section class="card"><div class="card-head"><h3>Decision ' + (i + 1) + '</h3>' +
           (p.decisions.length > 1 ? '<button class="link danger" data-action="remove-regret" data-index="' + i + '">Remove</button>' : '') + '</div>' +
@@ -813,10 +814,33 @@
     var answered = C.closing.reflectionQuestions.filter(function (q, i) { return has(state.closing.reflections['q' + i]); }).length;
     html += '<a class="chapter-card prologue-card" href="#/closing"><div class="ch-num">C</div><div class="ch-body"><h3>' + esc(C.closing.title) + '</h3><p class="muted small">' + esc(C.closing.label) + ' &middot; When your own leader breaks</p><p class="small">' +
       (answered ? answered + ' of ' + C.closing.reflectionQuestions.length + ' questions answered.' : 'Finish here once you have worked through the chapters.') + '</p></div></a>';
+    html += pageCard('monday');
     var started = C.workbook.exercises.filter(workbookStarted).length;
     html += '<a class="chapter-card prologue-card" href="#/workbook"><div class="ch-num">W</div><div class="ch-body"><h3>' + esc(C.workbook.title) + '</h3><p class="muted small">Nine exercises</p><p class="small">' +
       (started ? started + ' of ' + C.workbook.exercises.length + ' exercises started.' : 'Tools to do the work by hand, with the people you already work with.') + '</p></div></a>';
     html += '<a class="chapter-card prologue-card" href="#/epilogue"><div class="ch-num">E</div><div class="ch-body"><h3>' + esc(C.epilogue.title) + '</h3><p class="muted small">' + esc(C.epilogue.label) + ' &middot; ' + esc(C.epilogue.leader) + '</p><p class="small">What it looks like when Calvin breaks again, and catches it.</p></div></a>';
+    html += pageCard('letter') + pageCard('glossary');
+    return html;
+  }
+
+  /* Reading pages */
+  function bookPage(id) { return (C.pages || []).filter(function (p) { return p.id === id; })[0]; }
+
+  function pageCard(id) {
+    var p = bookPage(id);
+    if (!p) return '';
+    return '<a class="chapter-card prologue-card" href="#/read/' + p.id + '"><div class="ch-num">' + esc(p.mark) + '</div><div class="ch-body"><h3>' + esc(p.title) + '</h3><p class="muted small">' + esc(p.label) + '</p><p class="small">' + esc(p.card) + '</p></div></a>';
+  }
+
+  function viewPage(id) {
+    var p = bookPage(id);
+    if (!p) return viewNotFound();
+    var html = pageHead(p.label, p.title, '');
+    html += p.sections.map(function (sec) {
+      return '<section class="card">' + (sec.heading ? '<h2>' + esc(sec.heading) + '</h2>' : '') + paras(sec.paragraphs) + '</section>';
+    }).join('');
+    if (id === 'monday') html += '<div class="btn-row"><a class="btn" href="#/start">Write my breaking point sentence</a><a class="btn" href="#/workbook">Open the workbook</a></div>';
+    html += nextLink('#/chapters', 'Back to chapters');
     return html;
   }
 
@@ -1501,6 +1525,7 @@
       case 'closing': html = viewClosing(); break;
       case 'workbook': html = viewWorkbook(r.a); break;
       case 'epilogue': html = viewEpilogue(); break;
+      case 'read': html = viewPage(r.a); break;
       case 'plan': html = viewPlan(); break;
       case 'log': html = r.a === 'new' ? viewLogForm(null) : r.a === 'edit' ? viewLogForm(r.b) : viewLog(); break;
       case 'checkin': html = viewCheckin(r.a); break;
@@ -1508,7 +1533,7 @@
       default: html = viewNotFound();
     }
     app.innerHTML = html;
-    var navKey = { start: 'chapters', chapter: 'chapters', closing: 'chapters', workbook: 'chapters', epilogue: 'chapters', plan: 'home' }[r.name] || r.name;
+    var navKey = { start: 'chapters', chapter: 'chapters', closing: 'chapters', workbook: 'chapters', epilogue: 'chapters', read: 'chapters', plan: 'home' }[r.name] || r.name;
     document.querySelectorAll('[data-nav]').forEach(function (a) {
       if (a.dataset.nav === navKey) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });

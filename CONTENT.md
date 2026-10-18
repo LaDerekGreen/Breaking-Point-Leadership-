@@ -45,6 +45,10 @@ To drop in the book's exact text:
 
 `epilogue` holds One Year Later: a condensed `summary`, Walt's `quote` and the book's `closing` lines.
 
+## Reading pages
+
+`pages` in `content.js` holds Before the System Arrives, A Letter to the Reader and the Glossary. Each page has `sections`, and each section has a `heading` and `paragraphs`. They show as the M, L and G cards on the Chapters screen. The prologue's action step is `prologue.actionStep`.
+
 ## Source
 
 All chapter text was taken from the book manuscript "Publish V3 Final 19:03: Breaking Point Leadership - Book Draft" in Google Drive. No chapter is marked as a placeholder.
