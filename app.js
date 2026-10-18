@@ -889,9 +889,9 @@
   function viewEpilogue() {
     var E = C.epilogue;
     var html = pageHead(E.label, E.title, E.leader);
-    html += '<section class="card story">' + E.summary.map(function (t) { return '<p class="story-text">' + esc(t) + '</p>'; }).join('') + '</section>';
-    html += '<section class="card"><blockquote>' + esc(E.quote) + '</blockquote><p class="small muted">' + esc(E.quoteBy) + '</p></section>';
-    html += '<section class="card"><p>' + esc(E.closing) + '</p></section>';
+    html += E.sections.map(function (sec) {
+      return '<section class="card"><h2>' + esc(sec.heading) + '</h2>' + paras(sec.paragraphs) + '</section>';
+    }).join('');
     html += nextLink('#/chapters', 'Back to chapters');
     return html;
   }
@@ -900,7 +900,7 @@
   function viewClosing() {
     var K = C.closing;
     var html = pageHead(K.label, K.title, 'Answer honestly. Short answers are fine. Your answers are saved on this device and included in your report.');
-    html += '<section class="card story"><p class="story-text">' + esc(K.summary) + '</p></section>';
+    html += '<section class="card">' + paras([].concat(K.summary)) + '</section>';
     html += '<section class="card"><h2>Reflection</h2>' +
       K.reflectionQuestions.map(function (q, i) { return field(q, 'closing.reflections.q' + i, { rows: 3 }); }).join('') + '</section>';
     if (K.actionStep) html += '<section class="card"><h3>The book\'s action step</h3><p>' + esc(K.actionStep) + '</p></section>';

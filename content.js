@@ -67,13 +67,19 @@ window.BPAC_CONTENT = {
 
   /*
     Closing section: "Leading the Leader Who Broke", which follows the
-    resolved chapters in Part Two. It turns from the reader's own breaking
-    point to the leader above them.
+    resolved chapters in Part Two. The summary is the book's "What This
+    Story Teaches" passage that leads into these questions.
   */
   closing: {
     title: 'Leading the Leader Who Broke',
     label: 'Part Two',
-    summary: 'When the leader above you breaks, you are not helpless. Know your leader: their motivations, fears, wants and habits under pressure. Say early and plainly what you cannot carry. Stay out of rooms where you become the shield.',
+    summary: [
+      'If you work for a leader who breaks this way, three lessons from Nathan\'s year apply directly to you.',
+      'First, know your leader. Learn their motivations, their fears, their wants, and their habits under pressure. Not so you can manage them in a cynical way, but because you will one day need to say something they do not want to hear, and you will need to say it in words they can accept. Nathan reached Warren because he tied the hard truth to the thing Warren most wanted to protect.',
+      'Second, say early and plainly what you cannot carry. If your leader begins handing you work that belongs to their position, put it in writing and name the parts that require their authority, not yours. Loyalty that absorbs everything quietly is not loyalty to the organization. It is a way of keeping a broken leader comfortably broken.',
+      'Third, stay out of rooms where you become the shield. If your leader needs to correct the people below them, the correction is theirs to make. Your presence will not protect them. It will only move the target onto you.',
+      'When a leader breaks, the people around them are not helpless. The organization is depending on someone to bring that leader back. Very often, that someone is the person sitting closest to the door.'
+    ],
     reflectionQuestions: [
       'If my own leader went quiet tomorrow, what do I know about their fears and wants that would help me bring them back?',
       'What am I carrying right now that belongs to someone with more authority than I have, and have I said so?',
@@ -415,21 +421,109 @@ window.BPAC_CONTENT = {
   },
 
   /*
-    Epilogue: One Year Later. The summary is condensed from the book; the quote
-    and closing lines are the book's text.
+    Epilogue: One Year Later. The book's full text, with italics removed.
   */
   epilogue: {
     title: 'One Year Later',
     label: 'Epilogue',
     leader: 'Calvin Brooks',
-    summary: [
-      'Six months in, on an ordinary Tuesday after a morning defending himself to the CFO, Calvin cuts off Owen, his newest plant manager, forty seconds into a proposal. Then he hears it. He stops, names what he did in the room, and asks two questions before giving an opinion. Owen\'s answer finds the real cause of two forklift incidents: the schedule, not the training. Owen had waited three weeks for a good week to bring it.',
-      'Calvin\'s next report shows what he missed: in the four days before that meeting he had declined or deferred five requests from three managers, all during the same window of pressure from above. He goes back to each of them.',
-      'One year later, a bad quarter arrives. When Raymond brings a proposal, Calvin feels the old answer form and asks instead, "How will this fail?" He names the pressure he is under. He shows the room the week he broke, and what he reversed.'
-    ],
-    quote: 'You didn\'t write down that you\'d never break. You wrote down how you break. Nobody gets to the place where pressure stops working on them. The best you get is the place where you see it sooner.',
-    quoteBy: 'Walt',
-    closing: 'Leaders do not need better values. They need to see the distance between the values they write down and the lives their people actually live under them. Calvin needed a letter to see it. The next leader should not have to wait for one.'
+    sections: [
+      {
+        heading: 'Six Months In',
+        paragraphs: [
+          'The first relapse did not come during a crisis. It came on an ordinary Tuesday in September, which was what made it dangerous.',
+          'Calvin had spent the morning on the phone with the CFO about a safety audit at the northern distribution center. Two forklift incidents in a month, no injuries, but enough for the insurer to start asking questions and for the CFO to start asking Calvin why he had not seen it coming. Calvin did not have a good answer. By the time he walked into the operations review at one o\'clock, he had been defending himself for three hours, and some part of him was still doing it.',
+          'Owen Pratt was the newest plant manager on Calvin\'s team. He was thirty-four, eleven weeks into the job, and the first manager Calvin had hired since the review. He had been chosen through the comparison process Calvin now insisted on, and his record had beaten two internal candidates Calvin had known for years. Calvin had defended the choice to people who doubted it. He was proud of it.',
+          'Owen was third on the agenda. He had a proposal to change how the northern center scheduled its forklift crews, moving from fixed shifts to rotations matched to inbound truck volume. He had pulled six months of data. He had talked to every crew lead. He had a single slide.',
+          'He got about forty seconds into it.',
+          '"We\'re not redesigning scheduling in the middle of an audit," Calvin said. "Fix the training gap first. Bring me this in the spring."',
+          'The room went still in a way Calvin had not felt in months. Owen nodded, said "Understood," and started to close his laptop.',
+          'And Calvin heard it. Not the words themselves, but the shape of them. That\'s not happening. Fix the vendor we have. He had said those words to Elena almost two years earlier, or come within a half second of saying them, and he had built an entire plan around never saying them again. He had written his breaking point at the top of a page: When pressure comes from above, I stop listening and start deciding. He had shown it on a slide to the people in this room.',
+          'He had stopped listening forty seconds in. He had started deciding before Owen reached his second sentence.',
+          'Elena was looking at the table. Raymond Pike was looking directly at Calvin, and his face said nothing at all, which said everything.',
+          '"Owen," Calvin said. "Wait."',
+          'Owen stopped with the laptop half closed.',
+          '"I did the exact thing I told all of you I would stop doing. I\'ve been on the phone with finance all morning about the audit, and I walked in here already decided. That\'s not on you. Open it back up. I have two questions before I have an opinion."',
+          'Owen opened the laptop slowly, the way people do when they are not sure the door will stay open.',
+          '"First question," Calvin said. "How does this fail?"',
+          'Owen took a breath. "The rotation only works if the inbound schedule is accurate a day ahead. Right now it\'s accurate about eighty percent of the time. On the other twenty percent, we\'d be short a crew for part of a shift."',
+          '"And the second. What does this have to do with the forklift incidents?"',
+          'This was the part Owen had never reached. "Both incidents happened in the last hour of a ten-hour shift, during an inbound surge the fixed schedule didn\'t plan for. Same crew both times. They were tired, and they were rushing. The training gap is real, but it isn\'t why those incidents happened. The schedule is."',
+          'Nobody spoke for a moment.',
+          'Calvin had spent the entire morning telling the CFO the incidents were a training problem. He had been preparing to tell the insurer the same thing. He had been about to send the one person in the room who had found the actual cause back to his desk with instructions to fix the wrong problem.',
+          '"How long would a pilot take?" Calvin asked.',
+          '"Two weeks on one crew. I\'d want the crew lead\'s agreement before we start."',
+          '"You have mine. Get theirs." Calvin turned to the room. "And for the record, since we keep one now. I broke today. I want it on the notes."',
+          'Raymond wrote something down. Calvin would have given a great deal to know what it was.'
+        ]
+      },
+      {
+        heading: 'The Conversation After',
+        paragraphs: [
+          'Calvin asked Owen to stay when the meeting ended. Owen sat on the edge of his chair, notebook open, the same way Elena had once sat in that office. Calvin noticed it, and the noticing hurt more than he expected.',
+          '"I owe you more than what I said in there," Calvin said. "When I cut you off, what did you think was going to happen?"',
+          'Owen considered whether to answer honestly. Calvin could see him weigh it.',
+          '"Honestly? I thought that was the end of it. Not the proposal, the job. Everybody told me about you before I started. They said you used to be hard to bring things to, that you\'d changed, but that the old version came out when finance leaned on you. I figured I\'d met him."',
+          '"You did."',
+          '"I almost didn\'t bring it," Owen said. "I had the data three weeks ago. I kept waiting for a good week."',
+          'Calvin let that sit. Three weeks. In those three weeks, a tired crew had kept working ten-hour shifts through surges nobody planned for, because a new manager was waiting to see whether his boss was safe to approach. The cost of Calvin\'s breaking point had never been the meeting where it showed. It was every meeting people skipped because they expected it to.',
+          '"There won\'t ever be a good week," Calvin said. "Bring it in a bad one. Especially then. If I do what I did today again, say so in the room. You won\'t lose anything for it. I\'ll make sure of that in writing."',
+          'Owen closed his notebook. It was a small thing. Calvin noticed that too.'
+        ]
+      },
+      {
+        heading: 'What the Report Showed',
+        paragraphs: [
+          'On the first Monday of October, Calvin\'s monthly report arrived. He had read eight of them by now. Most had been quiet, a slow line of numbers moving in the right direction. This one had a flag on the second page.',
+          'It marked the operations review. Time before giving an opinion: forty seconds, against an average that had grown to more than six minutes. The flag noted the context Calvin had entered himself that afternoon, the pressure from finance, the reversal, the two questions, the pilot approved. Then it showed him something he had not entered and had not known.',
+          'In the four days before the meeting, while the audit pressure was building, Calvin had declined or deferred five requests from three different managers. Each one, alone, had a reason. Together, they matched the pattern from his first report almost exactly. The Tuesday meeting was not where he broke. It was where he finally noticed.',
+          'Below that was the line Calvin would remember: Every flagged decision occurred during the same seventy-two-hour window of pressure from above.',
+          'He had known his breaking point for a year. He had written it in his own handwriting. He had still not seen it arrive, because it did not arrive as a feeling. It arrived as five small, reasonable decisions that felt like efficiency while he made them.',
+          'He went back to each of the three managers that week. Two of the five requests he approved. Two he still declined, and he explained why in writing. The fifth he could not remember well enough to judge, so he asked the manager to bring it again and promised two questions before an opinion.'
+        ]
+      },
+      {
+        heading: 'The Call to Walt',
+        paragraphs: [
+          'That Friday, Calvin called Walt. He told him all of it: the meeting, Owen\'s three weeks of waiting, the four days he had not seen, the report.',
+          '"So you broke," Walt said.',
+          '"I broke."',
+          '"And you caught it in the room this time, instead of in a letter a year later. And then you found the part you didn\'t catch, and you went back and fixed that too." Walt paused. "Calvin, that\'s not failing the plan. That\'s the plan. You didn\'t write down that you\'d never break. You wrote down how you break. Nobody gets to the place where pressure stops working on them. The best you get is the place where you see it sooner."',
+          '"It doesn\'t feel like progress."',
+          '"It never does from inside it. Ask Owen in six months whether it was."',
+          'The forklift pilot ran for two weeks. Late-shift incidents at the northern center dropped to zero, and they stayed there. The insurer closed its inquiry. Calvin told the CFO exactly where the fix had come from, and from whom, and he put Owen\'s name on the slide.',
+          'In the next climate survey, one anonymous comment from the northern center read: The new plant manager actually listens to us, and I think it\'s because somebody finally listens to him.',
+          'Calvin printed that one and kept it.'
+        ]
+      },
+      {
+        heading: 'One Year Later',
+        paragraphs: [
+          'The bad quarter came in March, the way Raymond Pike had predicted it would.',
+          'A major customer cut its order volume by a third with two weeks of notice. The CFO wanted a recovery plan by Friday, and he wanted it from Calvin. By Wednesday, Calvin had not slept well in three nights, and the pressure from above was exactly the kind he had written at the top of his plan a year earlier.',
+          'On Thursday morning, Raymond brought him a proposal to shift two production lines to a smaller customer the company had always treated as an afterthought. Calvin felt the answer form before Raymond finished his first sentence. Not now. We don\'t have time for experiments.',
+          'He had the words ready. He did not say them.',
+          '"How will this fail?" Calvin asked instead.',
+          'Raymond paused. He had come in braced for a fight and had not prepared for a question. Then he walked Calvin through it: the retooling cost, the risk that the smaller customer could not absorb the volume, the two weeks of overlap where both lines would run below capacity. He had answers for most of it. For the rest, he said plainly, "I don\'t know yet."',
+          '"What would you need to find out?"',
+          '"Three days and a call with their operations director."',
+          '"You have them," Calvin said. "And Raymond, I\'m under real pressure from the CFO on this. That\'s why I\'m asking hard questions, not because I doubt you."',
+          'Raymond looked at him for a long moment. "You told us you\'d do that. Name the pressure."',
+          '"I did."',
+          'The plan worked, mostly. One line transferred cleanly. The other took six weeks longer than Raymond estimated, and the company absorbed a loss it would have avoided with more time. Calvin put both results on the next quarterly slide, under the same title he had used a year before: My Pattern.',
+          'His numbers had held. The dismissal rate stayed well below where it had been. His time before giving an opinion had not slipped, even in March. SI had flagged one week, the worst week of the crisis, where he had overruled three recommendations in two days without asking a single question. He showed that too.',
+          '"That was me breaking," he told the room. "I saw it the following Monday. Two of those three decisions, I reversed. The third one I\'d make again, and I told the manager why."',
+          'Nobody laughed this time. Nobody needed to.',
+          'After the meeting, Elena stayed behind. She had been promoted in January to director of supply chain, a role Calvin had recommended her for in writing, with the packaging decision as his first example.',
+          '"Can I tell you something?" she said. "The review last year. Twenty-five people. If they did it again today, I think the answers would be different."',
+          '"Different isn\'t finished," Calvin said.',
+          '"No," she agreed. "But it\'s the first time I\'ve believed it was going somewhere."',
+          'That night, Calvin took the framed philosophy down from his office wall. He did not throw it away. He set it on the credenza behind his desk, where visitors could no longer read it and he could see it every time he turned around.',
+          'The words had never been the problem. They had been true the whole time. What had been missing was any way for Calvin to know whether he was living them. Now he had one, and so did his people.',
+          'That is the whole argument of this book, in one office, in one year. Leaders do not need better values. They need to see the distance between the values they write down and the lives their people actually live under them. Calvin needed a letter to see it. The next leader should not have to wait for one.'
+        ]
+      }
+    ]
   },
 
   /*
@@ -740,7 +834,7 @@ window.BPAC_CONTENT = {
       breakingPoint: 'self',
       title: 'Self-Preservation',
       leader: 'Grace',
-      summary: 'Grace spent twenty years protecting her people, once fighting six hours to keep one analyst off a layoff list. Eighteen months from her pension vesting date as chief operating officer, she signs off on cuts that land on the team with the least power to push back, and the two protégés she once saved help her call it stewardship.',
+      summary: 'Twenty years. That\'s how long Grace spent at Vantwell Industrial building a reputation as someone who protects her people, fights for headcount, pushes back on cuts that would gut a team, and takes the hit personally rather than pass it down. People who worked under her tell the same handful of stories: the year she gave up her own bonus pool to save two positions on a struggling line, the time she sat in a budget meeting for six hours to keep a single analyst off a layoff list nobody else was fighting for. It wasn\'t performance. It was who she was, consistently, for twenty years, long before anyone was checking. Then she makes it to chief operating officer, the seat where every decision gets measured against quarterly shareholder returns. Eighteen months later the next round of cuts lands, and it lands on the same team it always lands on, the one with the least power to push back. The executive who spent twenty years protecting people has now signed off on sacrificing them.',
       focus: 'Noticing when I protect my seat at my people\'s expense, and choosing my people when the two collide.',
       assessmentQuestion: 'Who absorbed the cost of my last three hard decisions? Was it spread fairly, or did it land on the people least able to push back? What was I protecting at the time?',
       assessmentChecklist: [

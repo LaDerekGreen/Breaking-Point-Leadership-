@@ -43,7 +43,7 @@ To drop in the book's exact text:
 
 `workbook` in `content.js` holds the nine exercises from The Breaking Point Workbook. Each exercise has `body` and `after` paragraphs, an optional `list`, and `fields` the reader fills in (each with a `key` and `label`). Do not change a field's `key` once readers have used it, or their saved answers will no longer show.
 
-`epilogue` holds One Year Later: a condensed `summary`, Walt's `quote` and the book's `closing` lines.
+`epilogue` holds the full text of One Year Later, as `sections` with a `heading` and `paragraphs`.
 
 ## Reading pages
 
