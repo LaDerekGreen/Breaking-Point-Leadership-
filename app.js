@@ -164,6 +164,22 @@
     return '<div class="field"><label for="' + id + '">' + esc(label) + '</label>' + hint + input + '</div>';
   }
 
+  function yesNo(label, path) {
+    var val = getPath(state, path);
+    var name = 'f_' + path.replace(/\W/g, '_');
+    return '<fieldset class="field"><legend>' + esc(label) + '</legend><div class="seg">' +
+      [['yes', 'Yes'], ['no', 'No']].map(function (o) {
+        return '<label><input type="radio" name="' + name + '" data-bind="' + esc(path) + '" value="' + o[0] + '"' + (val === o[0] ? ' checked' : '') + '><span>' + o[1] + '</span></label>';
+      }).join('') + '</div></fieldset>';
+  }
+
+  function checklistText(c, s) {
+    return (c.assessmentChecklist || []).map(function (q, i) {
+      var a = s.checks && s.checks['q' + i];
+      return (i + 1) + '. ' + q + '\nMy answer: ' + (a === 'yes' ? 'Yes' : a === 'no' ? 'No' : '(not answered)');
+    }).join('\n');
+  }
+
   /* ---------- Plan and record helpers ---------- */
 
   function planDay() {
@@ -342,6 +358,7 @@
         C.coachInstructions, '',
         section('About me', readerProfileText()),
         section('The book context: Chapter ' + c.id + ', ' + c.title, 'Leader: ' + c.leader + '\nBreaking point: ' + bp(c.breakingPoint).name + ': ' + bp(c.breakingPoint).definition + '\nStory: ' + c.summary + '\nFocus: ' + c.focus),
+        c.assessmentChecklist ? section('My yes or no answers', checklistText(c, s)) : '',
         section('My self-assessment', 'Where does my pattern look like ' + c.leader + '\'s?\n' + c.assessmentQuestion + '\n\nMy answer: ' + orNone(s.assessmentAnswer)),
         closing(
           '1. Ask me at least two questions before you give any assessment. One question at a time.\n' +
@@ -371,7 +388,7 @@
           '1. Ask me these questions one at a time, in order. Wait for my answer before moving on.\n' +
           '2. After each answer, ask at least one harder follow up question that tests whether my answer is true or comfortable.\n' +
           '3. If I gave first thoughts above, use them as a starting point and push past them.\n' +
-          '4. After the last question, tell me what you noticed across my answers.',
+          (c.reflectionCoach ? '4. ' + c.reflectionCoach + '\n5. ' : '4. ') + 'After the last question, tell me what you noticed across my answers.',
           'REFLECTION SUMMARY: (three or four sentences in my own words where possible)\n' +
           'WHAT I AVOIDED: (the question or part I answered least honestly, if any)\n' +
           'ONE THING TO CHANGE: (one sentence)'
@@ -793,7 +810,7 @@
     }
     html += order.others.map(function (c) { return chapterCard(c, false); }).join('');
     var answered = C.closing.reflectionQuestions.filter(function (q, i) { return has(state.closing.reflections['q' + i]); }).length;
-    html += '<a class="chapter-card prologue-card" href="#/closing"><div class="ch-num">C</div><div class="ch-body"><h3>' + esc(C.closing.title) + '</h3><p class="muted small">' + esc(C.closing.label) + ' &middot; After Chapter 5</p><p class="small">' +
+    html += '<a class="chapter-card prologue-card" href="#/closing"><div class="ch-num">C</div><div class="ch-body"><h3>' + esc(C.closing.title) + '</h3><p class="muted small">' + esc(C.closing.label) + ' &middot; When your own leader breaks</p><p class="small">' +
       (answered ? answered + ' of ' + C.closing.reflectionQuestions.length + ' questions answered.' : 'Finish here once you have worked through the chapters.') + '</p></div></a>';
     return html;
   }
@@ -802,10 +819,10 @@
   function viewClosing() {
     var K = C.closing;
     var html = pageHead(K.label, K.title, 'Answer honestly. Short answers are fine. Your answers are saved on this device and included in your report.');
-    if (K.placeholder) html += '<p class="note small">Draft content. The questions are from the book; the title and introduction will be updated.</p>';
     html += '<section class="card story"><p class="story-text">' + esc(K.summary) + '</p></section>';
     html += '<section class="card"><h2>Reflection</h2>' +
       K.reflectionQuestions.map(function (q, i) { return field(q, 'closing.reflections.q' + i, { rows: 3 }); }).join('') + '</section>';
+    if (K.actionStep) html += '<section class="card"><h3>The book\'s action step</h3><p>' + esc(K.actionStep) + '</p></section>';
     html += nextLink('#/chapters', 'Back to chapters');
     return html;
   }
@@ -831,6 +848,8 @@
     }
 
     if (step === 'assessment') {
+      if (c.assessmentChecklist) html += '<section class="card"><h2>Answer honestly, yes or no</h2>' +
+        c.assessmentChecklist.map(function (q, i) { return yesNo((i + 1) + '. ' + q, 'chapters.' + id + '.checks.q' + i); }).join('') + '</section>';
       html += '<section class="card"><h2>Where does my pattern look like ' + esc(c.leader) + '\'s?</h2><p>' + esc(c.assessmentQuestion) + '</p>' + draft +
         field('My answer', 'chapters.' + id + '.assessmentAnswer', { rows: 4 }) + '</section>';
       html += promptCard('assessment', id);

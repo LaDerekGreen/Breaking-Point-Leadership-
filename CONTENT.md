@@ -14,7 +14,9 @@ Each chapter looks like this:
   leader: 'Marcus',
   summary: 'Marcus votes fairly in one blind review, then ...',
   focus: 'Who I sponsor and who I overlook.',
-  assessmentQuestion: '...',         // the chapter's specific self-assessment question
+  assessmentQuestion: '...',         // the chapter's self-assessment question for the coach
+  assessmentChecklist: [ '...' ],    // the book's yes or no self-assessment list
+  reflectionCoach: '...',            // the book's extra instruction for the reflection coach
   reflectionQuestions: [             // the coach asks these one at a time
     'Question one?',
     'Question two?'
@@ -33,13 +35,13 @@ To drop in the book's exact text:
 
 **Apostrophes:** text is wrapped in single quotes, so write an apostrophe as `\'` (for example `'Devon\'s openness'`), or wrap that text in double quotes instead.
 
-## Closing reflection
+## Closing section
 
-`closing` in `content.js` holds the reflection questions that come after Chapter 5. It shows as the last card on the Chapters screen. The questions are the book's text; the `title`, `label` and `summary` are drafts. Rename them to match the book and set `placeholder: false`.
+`closing` in `content.js` is "Leading the Leader Who Broke", shown as the last card on the Chapters screen. It holds that section's reflection questions and action step.
 
-## Current placeholders
+## Source
 
-Reflection questions for the prologue and chapters 1 through 5 are the book's text. Chapters 1 through 5 still use draft assessment questions and action steps written from the themes, so they keep `placeholder: true` until those are replaced. Chapter 5 (Grace) also has a draft story summary.
+All chapter text was taken from the book manuscript "Publish V3 Final 19:03: Breaking Point Leadership - Book Draft" in Google Drive. No chapter is marked as a placeholder.
 
 ## Writing rule
 
