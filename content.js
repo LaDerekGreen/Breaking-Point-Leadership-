@@ -728,7 +728,7 @@ window.BPAC_CONTENT = {
     {
       id: 1,
       breakingPoint: 'comfort',
-      title: 'Comfort',
+      title: 'The One Vote That Cost Him Nothing',
       leader: 'Marcus',
       summary: 'Marcus votes fairly in one blind review, then goes back to sponsoring only people like himself.',
       focus: 'Who I sponsor and who I overlook.',
@@ -749,12 +749,13 @@ window.BPAC_CONTENT = {
       ],
       reflectionCoach: 'After each answer, push back with a harder follow up before you move on.',
       actionStep: 'List everyone you have mentored, sponsored, or recommended over the last three years, and write down what they have in common. Then choose one strong performer outside that pattern and put your name behind them, on the record, this quarter.',
+      planCoach: 'Turn this into a ninety day plan with no more than three commitments. For each one, tell me what I will do differently, how I will measure it, and who can tell me if I am slipping.',
       placeholder: false
     },
     {
       id: 2,
       breakingPoint: 'convenience',
-      title: 'Convenience',
+      title: 'The Weapon Called Collaborate',
       leader: 'Priya',
       summary: 'Priya passes down a vague "collaborate" instruction in the way that protects her.',
       focus: 'Clarifying instructions and giving everyone an even start.',
@@ -775,12 +776,13 @@ window.BPAC_CONTENT = {
       ],
       reflectionCoach: 'Do not accept an answer that sounds like an excuse.',
       actionStep: 'The next time an instruction reaches you with an undefined word in it, ask in writing what it means before you pass it down. Then give everyone it affects the same briefing at the same time.',
+      planCoach: 'Build me a ninety day plan for turning unclear instructions into clear ones before they reach my team, with a way to check that everyone started even.',
       placeholder: false
     },
     {
       id: 3,
       breakingPoint: 'trust',
-      title: 'Misplaced Trust',
+      title: 'The Confession That Cost Him the Room',
       leader: 'Devon',
       summary: 'Devon\'s openness is used against him because no one defined its limits.',
       focus: 'Sharing reasoning, not exposure; writing a one page "How I Share."',
@@ -801,12 +803,13 @@ window.BPAC_CONTENT = {
       ],
       reflectionCoach: 'Press me on any answer where I blame the other person instead of the missing boundary.',
       actionStep: 'Write your own one page How I Share: what decisions and reasoning you share and with whom, where your uncertainty goes, and how you handle personal matters. Give it to your team and ask them to hold you to it.',
+      planCoach: 'Help me draft my one page How I Share, then build a ninety day plan to use it, with a check each month on whether my team says I am explaining my decisions.',
       placeholder: false
     },
     {
       id: 4,
       breakingPoint: 'standing',
-      title: 'Fear of Standing Alone',
+      title: 'The Unanimous Lie',
       leader: "Renata's committee",
       summary: 'Two committee members privately agree Renata is the stronger candidate and say nothing in the room.',
       focus: 'Putting the records side by side and speaking up.',
@@ -827,12 +830,13 @@ window.BPAC_CONTENT = {
       ],
       reflectionCoach: 'If my answer depends on someone else speaking first, point that out.',
       actionStep: 'In your next selection or review meeting, be the person who puts the records side by side and says what they show. If the room still chooses differently, ask that the reason be written down. It costs you one uncomfortable minute. Your silence costs someone else their career.',
+      planCoach: 'Build me a ninety day plan for speaking up in selection decisions, including the exact words I will use to put the records on the table, and a way to track whether I did.',
       placeholder: false
     },
     {
       id: 5,
       breakingPoint: 'self',
-      title: 'Self-Preservation',
+      title: 'The Verdict She Never Made',
       leader: 'Grace',
       summary: 'Twenty years. That\'s how long Grace spent at Vantwell Industrial building a reputation as someone who protects her people, fights for headcount, pushes back on cuts that would gut a team, and takes the hit personally rather than pass it down. People who worked under her tell the same handful of stories: the year she gave up her own bonus pool to save two positions on a struggling line, the time she sat in a budget meeting for six hours to keep a single analyst off a layoff list nobody else was fighting for. It wasn\'t performance. It was who she was, consistently, for twenty years, long before anyone was checking. Then she makes it to chief operating officer, the seat where every decision gets measured against quarterly shareholder returns. Eighteen months later the next round of cuts lands, and it lands on the same team it always lands on, the one with the least power to push back. The executive who spent twenty years protecting people has now signed off on sacrificing them.',
       focus: 'Noticing when I protect my seat at my people\'s expense, and choosing my people when the two collide.',
@@ -853,6 +857,7 @@ window.BPAC_CONTENT = {
       ],
       reflectionCoach: 'When I describe a choice as unavoidable, ask me what else I tried.',
       actionStep: 'Before your next major decision affecting people\'s jobs, ask your two most trusted advisors to argue against it for one full hour. Write down every alternative they raise and why you rejected it. Keep that page.',
+      planCoach: 'Build me a ninety day plan that makes me price out and document real alternatives before any decision that affects people\'s jobs, and names who will argue against me each time.',
       placeholder: false
     }
   ]
