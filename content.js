@@ -84,6 +84,354 @@ window.BPAC_CONTENT = {
   },
 
   /*
+    The Breaking Point Workbook. Text from the book, with tables turned into
+    lists and fields the reader can fill in.
+  */
+  workbook: {
+    title: 'The Breaking Point Workbook',
+    intro: [
+      'The ten steps in the last chapter tell you what to do. This workbook gives you the tools to do it. Every exercise here can be done with a pen, a notebook, and the people you already work with. None of them requires software, a budget, or anyone\'s permission.',
+      'Use it in order the first time. Each exercise builds on the one before it. After that, return to whichever one you need. Most leaders find that two or three of these become permanent habits and the rest become tools they pull out when pressure rises.',
+      'One rule applies to every page: write your answers down. A breaking point you only think about stays comfortable. A breaking point you write in your own hand becomes something you can be held to, the way Calvin\'s was.'
+    ],
+    finalWord: [
+      'None of these exercises will make you a different person. That was never the goal. Every leader in this book had the capacity to do the right thing. What they lacked was a way to see themselves clearly and a structure that kept them looking.',
+      'This workbook is that structure, built by hand. It is slower than a system, and it depends on your honesty in a way a system does not. But it starts today, it costs nothing, and it puts you in the small group of leaders who choose to find their breaking point before it finds them.'
+    ],
+    exercises: [
+      {
+        id: 1,
+        title: 'Find Your Breaking Point',
+        time: 'One hour, alone.',
+        body: [
+          'Think of three decisions from the last two years that you regret, or that you would make differently now. Not mistakes of skill. Mistakes of judgment, where you knew better or should have. For each one, answer: What did I decide? What was happening around me that week? Who or what was pushing on me? What was I protecting? Who paid the cost of the decision?',
+          'Now read across your answers. Most leaders find that one row repeats. The pressure comes from the same direction, or the thing being protected is the same, or the cost lands on the same kind of person. That repetition is your pattern.',
+          'Compare what you found to the five breaking points in this book. Your pattern may match one, or blend two. Now write it in one sentence that begins with the word "When."',
+          'Calvin\'s read: When pressure comes from above, I stop listening and start deciding. Yours should be as plain as that. If it sounds flattering, rewrite it. A breaking point that makes you look good is a blind spot wearing a disguise.',
+          'Put the sentence somewhere you will see it before difficult meetings. Inside a notebook cover works. So does the first line of your calendar on Monday mornings.'
+        ],
+        link: {
+          href: '#/start',
+          label: 'Do this exercise in The Letter'
+        },
+        fields: [
+
+        ]
+      },
+      {
+        id: 2,
+        title: 'The Three Vantage Point Survey',
+        time: 'Two weeks, with help.',
+        body: [
+          'This is the exercise most leaders avoid, and the one that teaches the most. You will ask the people above you, beside you, and below you how they experience your leadership, and you will arrange it so they can answer honestly.',
+          'Step one: choose a neutral collector. Do not collect the answers yourself. Ask someone you trust who does not report to you and is not competing with you: a human resources partner, a peer from another department, or an outside coach. Their job is to gather the responses, remove names, and give you only the combined results.',
+          'Step two: protect small groups. If any group has fewer than five people, the collector combines its answers with another group before you see them. Your boss is a group of one, so your boss\'s answers are always combined with your peers\' answers or given to you directly in conversation instead. This is the single most important rule in the exercise.',
+          'Step three: ask the same questions of everyone. Each is answered on a scale of one to five, from strongly disagree to strongly agree, with space for a written comment. Then add one open question for everyone: What does this leader do that makes it harder for you to tell them the truth?'
+        ],
+        list: [
+          'This leader asks questions before giving an opinion.',
+          'I can bring this leader bad news without worrying about how it will affect me.',
+          'When this leader is under pressure, I can still predict how they will react.',
+          'This leader explains the reasoning behind decisions that affect me.',
+          'Assignments and opportunities from this leader are fairly distributed.',
+          'This leader follows through on commitments they make to me.',
+          'When I disagree with this leader, my view is considered seriously.',
+          'This leader develops people for their next role, not only for their current one.'
+        ],
+        after: [
+          'Step four: compare the three views. Ask the collector for average scores on each question, separated by group: above, beside, and below. Where all three groups agree, you have found your strengths and your known weaknesses. Where they disagree by a point or more, you have found your blind spots. Pay closest attention to any question where the people above you rate you high and the people below you rate you low. That gap is where Calvin lived for years without knowing it.',
+          'Step five: tell people what you learned. Within two weeks of receiving the results, tell everyone who answered what you heard and one thing you will change. You do not need to share every score. You do need to show that answering mattered.'
+        ],
+        fields: [
+          {
+            key: 'collector',
+            label: 'My neutral collector (a role, not a name)',
+            type: 'text'
+          },
+          {
+            key: 'scores',
+            label: 'Average scores by group: above, beside, below (one line per question)',
+            rows: 8
+          },
+          {
+            key: 'gaps',
+            label: 'Where the groups disagree by a point or more'
+          },
+          {
+            key: 'change',
+            label: 'What I will tell respondents, and one thing I will change'
+          }
+        ]
+      },
+      {
+        id: 3,
+        title: 'The Decision Log',
+        time: 'Five minutes per decision, for ninety days.',
+        body: [
+          'SI is, at its core, a decision log that never stops running. You can build a small version yourself. For the next ninety days, record every significant decision that affects someone else\'s work, assignment, evaluation, or opportunity: the date, the decision, who it affected, the pressure you were under, the questions you asked first and the alternatives you considered.',
+          'At the end of each month, read the log from top to bottom and answer three questions.'
+        ],
+        list: [
+          'In how many decisions did I ask at least two questions first?',
+          'Did the decisions I made under pressure look different from the ones I made without it?',
+          'Do the people affected by my decisions share anything in common that I did not intend?'
+        ],
+        after: [
+          'The log will feel tedious for two weeks. Then it will start to show you things. Calvin\'s flagged week, five small decisions he never noticed, is exactly the kind of pattern a log like this catches.'
+        ],
+        link: {
+          href: '#/log',
+          label: 'Open my decision log'
+        },
+        fields: [
+          {
+            key: 'month1',
+            label: 'First monthly read: my answers to the three questions'
+          },
+          {
+            key: 'month2',
+            label: 'Second monthly read'
+          },
+          {
+            key: 'month3',
+            label: 'Third monthly read'
+          }
+        ]
+      },
+      {
+        id: 4,
+        title: 'The Comparison Sheet',
+        time: 'Thirty minutes before any selection decision.',
+        body: [
+          'Use this for every hire, promotion, stretch assignment, or board seat you help decide. Complete it before the group discusses fit, presence, or potential. Remove names and program histories if you can. Compare each candidate on these measures.'
+        ],
+        list: [
+          'Primary result in current role',
+          'Result compared to target, last three years',
+          'Retention or engagement of their team',
+          'Hardest problem they solved, documented',
+          'Development of people under them',
+          'Times previously considered and not selected'
+        ],
+        after: [
+          'After the discussion, if the group selects anyone other than the strongest record, complete one more line in writing: We selected ___ over the stronger documented record because ___.',
+          'Then read the sentence aloud. A reason grounded in performance will survive being said out loud. A comfortable reason usually will not, and that moment of discomfort is the point. Renata\'s committee never had to write this sentence. If they had, the vote might not have been unanimous.',
+          'Pay special attention to the last row. Someone who has been considered and passed over two or three times is the person most likely to be held in place for someone else\'s convenience.'
+        ],
+        fields: [
+          {
+            key: 'sheet',
+            label: 'My comparison (Candidate A, B and C on each measure)',
+            rows: 8
+          },
+          {
+            key: 'sentence',
+            label: 'We selected ___ over the stronger documented record because ___',
+            rows: 2
+          }
+        ]
+      },
+      {
+        id: 5,
+        title: 'The Instruction Translator',
+        time: 'Fifteen minutes per instruction.',
+        body: [
+          'Before you pass any significant instruction down to your team, complete this worksheet. Priya never did.'
+        ],
+        after: [
+          'After you brief your team, ask the most junior person affected to explain the instruction back to you in their own words. If their version does not match yours, the gap is yours to close, not theirs.'
+        ],
+        fields: [
+          {
+            key: 'received',
+            label: 'The instruction as I received it'
+          },
+          {
+            key: 'word',
+            label: 'Any word in it that could mean more than one thing',
+            type: 'text'
+          },
+          {
+            key: 'clarify',
+            label: 'What I asked my own boss to clarify, and their answer'
+          },
+          {
+            key: 'meaning',
+            label: 'What this means for my team specifically'
+          },
+          {
+            key: 'stop',
+            label: 'What my team should stop doing to make room for it'
+          },
+          {
+            key: 'worked',
+            label: 'How we will know it worked'
+          },
+          {
+            key: 'headstart',
+            label: 'Does it give anyone on my team a head start that others will not get? If yes, how will I level it?'
+          }
+        ]
+      },
+      {
+        id: 6,
+        title: 'The Placement Review',
+        time: 'One afternoon per year, with help.',
+        body: [
+          'Once a year, review every person on your team against their likely career path. First, bring in one person who knows career paths better than you do, such as a human resources partner or a senior colleague from another department.',
+          'Then complete one line for each person, covering these columns.'
+        ],
+        list: [
+          'Time in current role',
+          'Has mastered this role?',
+          'Next role that would grow them',
+          'Am I keeping them here for my convenience?',
+          'Action and date'
+        ],
+        after: [
+          'The fourth column is the one that matters. Answer it honestly. If someone is in their role mainly because they make your numbers look good, write that down. Then decide whether you will move them forward this year, and write the date.',
+          'Finally, write a one page description of how you ran the review and give it to your own boss and to whoever is most likely to replace you. A written process has a chance to survive you.'
+        ],
+        fields: [
+          {
+            key: 'lines',
+            label: 'One line per person (describe roles, not names)',
+            rows: 8
+          },
+          {
+            key: 'process',
+            label: 'How I ran the review',
+            rows: 5
+          }
+        ]
+      },
+      {
+        id: 7,
+        title: 'The Speak Up Tracker',
+        time: 'Ten minutes a month, for ninety days after each concern.',
+        body: [
+          'When anyone on your team raises a serious concern, about safety, ethics, fairness, or treatment, open a private page for them and track what happens next. The point is not to watch the person. It is to watch what the organization does to them. At day 30, day 60 and day 90, check each of these.'
+        ],
+        list: [
+          'Have their assignments changed in size or quality?',
+          'Has their most recent evaluation changed without documented cause?',
+          'Are peers treating them differently?',
+          'Have they been left out of meetings they used to attend?',
+          'Have I personally checked in with them?',
+          'If they moved teams, have I spoken with their new leader?'
+        ],
+        after: [
+          'If any answer worries you, act on it that week. Do not wait for a formal complaint. By the time one arrives, the damage has usually been done.'
+        ],
+        fields: [
+          {
+            key: 'concern',
+            label: 'The concern raised (describe the role, not the name)',
+            rows: 2
+          },
+          {
+            key: 'day30',
+            label: 'Day 30'
+          },
+          {
+            key: 'day60',
+            label: 'Day 60'
+          },
+          {
+            key: 'day90',
+            label: 'Day 90'
+          }
+        ]
+      },
+      {
+        id: 8,
+        title: 'The Pressure Briefing',
+        time: 'Five minutes, whenever pressure rises.',
+        body: [
+          'When significant pressure comes from above, tell your team about it before it can come out sideways. Use this short script, adapted to your own voice.'
+        ],
+        after: [
+          'Close with: "If you see me react to this in a way that is not fair to you, tell me."',
+          'The fourth line is the one most leaders leave out. Say it anyway. It tells your team where your line is, and it reminds you.'
+        ],
+        fields: [
+          {
+            key: 'above',
+            label: 'Here is what is happening above us:',
+            rows: 2
+          },
+          {
+            key: 'deliver',
+            label: 'Here is what I have been asked to deliver:',
+            rows: 2
+          },
+          {
+            key: 'week',
+            label: 'Here is what that means for us this week:',
+            rows: 2
+          },
+          {
+            key: 'willNot',
+            label: 'Here is what I will not do, even under this pressure:',
+            rows: 2
+          }
+        ]
+      },
+      {
+        id: 9,
+        title: 'Your Ninety Day Plan',
+        time: 'Thirty minutes to set up, ten minutes each week after.',
+        body: [
+          'Bring the other exercises together into a single ninety day plan. Write your breaking point at the top of the page, then work through the weeks below.'
+        ],
+        weeks: [
+          'Write my breaking point (Exercise 1)',
+          'Choose a collector and launch the survey (Exercise 2)',
+          'Start the decision log (Exercise 3)',
+          'Receive survey results and complete the gap table',
+          'Tell respondents what I learned and one change I will make',
+          'Use the comparison sheet on the next selection (Exercise 4)',
+          'Translate the next instruction I receive (Exercise 5)',
+          'First monthly read of my decision log',
+          'Brief my team before the next pressure point (Exercise 8)',
+          'Complete the placement review (Exercise 6)',
+          'Review any open speak up trackers (Exercise 7)',
+          'Second monthly read of my decision log',
+          'Ask the same survey questions again and compare'
+        ],
+        after: [
+          'In week thirteen, compare your new survey results with the first. Do not expect perfection. Calvin\'s numbers improved and he still broke in month six. Look for the gap between how you see yourself and how others see you. If it has narrowed, the plan is working. If it has not, return to your breaking point sentence and ask whether it is honest.'
+        ],
+        link: {
+          href: '#/plan',
+          label: 'Open my 90 day plan'
+        },
+        fields: [
+
+        ]
+      }
+    ]
+  },
+
+  /*
+    Epilogue: One Year Later. The summary is condensed from the book; the quote
+    and closing lines are the book's text.
+  */
+  epilogue: {
+    title: 'One Year Later',
+    label: 'Epilogue',
+    leader: 'Calvin Brooks',
+    summary: [
+      'Six months in, on an ordinary Tuesday after a morning defending himself to the CFO, Calvin cuts off Owen, his newest plant manager, forty seconds into a proposal. Then he hears it. He stops, names what he did in the room, and asks two questions before giving an opinion. Owen\'s answer finds the real cause of two forklift incidents: the schedule, not the training. Owen had waited three weeks for a good week to bring it.',
+      'Calvin\'s next report shows what he missed: in the four days before that meeting he had declined or deferred five requests from three managers, all during the same window of pressure from above. He goes back to each of them.',
+      'One year later, a bad quarter arrives. When Raymond brings a proposal, Calvin feels the old answer form and asks instead, "How will this fail?" He names the pressure he is under. He shows the room the week he broke, and what he reversed.'
+    ],
+    quote: 'You didn\'t write down that you\'d never break. You wrote down how you break. Nobody gets to the place where pressure stops working on them. The best you get is the place where you see it sooner.',
+    quoteBy: 'Walt',
+    closing: 'Leaders do not need better values. They need to see the distance between the values they write down and the lives their people actually live under them. Calvin needed a letter to see it. The next leader should not have to wait for one.'
+  },
+
+  /*
     Chapter modules. Self-assessment checklists, reflection questions,
     coaching instructions and action steps are the book's text.
   */

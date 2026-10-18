@@ -36,6 +36,7 @@
       },
       chapters: {},
       closing: { reflections: {} },
+      workbook: {},
       plan: null,
       pastPlans: [],
       log: [],
@@ -812,6 +813,62 @@
     var answered = C.closing.reflectionQuestions.filter(function (q, i) { return has(state.closing.reflections['q' + i]); }).length;
     html += '<a class="chapter-card prologue-card" href="#/closing"><div class="ch-num">C</div><div class="ch-body"><h3>' + esc(C.closing.title) + '</h3><p class="muted small">' + esc(C.closing.label) + ' &middot; When your own leader breaks</p><p class="small">' +
       (answered ? answered + ' of ' + C.closing.reflectionQuestions.length + ' questions answered.' : 'Finish here once you have worked through the chapters.') + '</p></div></a>';
+    var started = C.workbook.exercises.filter(workbookStarted).length;
+    html += '<a class="chapter-card prologue-card" href="#/workbook"><div class="ch-num">W</div><div class="ch-body"><h3>' + esc(C.workbook.title) + '</h3><p class="muted small">Nine exercises</p><p class="small">' +
+      (started ? started + ' of ' + C.workbook.exercises.length + ' exercises started.' : 'Tools to do the work by hand, with the people you already work with.') + '</p></div></a>';
+    html += '<a class="chapter-card prologue-card" href="#/epilogue"><div class="ch-num">E</div><div class="ch-body"><h3>' + esc(C.epilogue.title) + '</h3><p class="muted small">' + esc(C.epilogue.label) + ' &middot; ' + esc(C.epilogue.leader) + '</p><p class="small">What it looks like when Calvin breaks again, and catches it.</p></div></a>';
+    return html;
+  }
+
+  /* Workbook */
+  function workbookPath(ex, key) { return 'workbook.ex' + ex.id + '.' + key; }
+
+  function workbookStarted(ex) {
+    var d = state.workbook['ex' + ex.id];
+    return !!d && Object.keys(d).some(function (k) { return has(d[k]); });
+  }
+
+  function paras(list) { return (list || []).map(function (t) { return '<p>' + esc(t) + '</p>'; }).join(''); }
+
+  function viewWorkbook(n) {
+    var W = C.workbook;
+    if (!n) {
+      var html = pageHead('Workbook', W.title, 'Write your answers down. They are saved on this device and included in your report.');
+      html += '<section class="card">' + paras(W.intro) + '</section>';
+      html += W.exercises.map(function (ex) {
+        return '<a class="chapter-card" href="#/workbook/' + ex.id + '"><div class="ch-num">' + ex.id + '</div><div class="ch-body"><h3>' + esc(ex.title) + '</h3><p class="muted small">' + esc(ex.time) + '</p>' +
+          (workbookStarted(ex) ? '<p class="small">Started.</p>' : '') + '</div></a>';
+      }).join('');
+      html += '<section class="card"><h2>A final word on the workbook</h2>' + paras(W.finalWord) + '</section>';
+      return html;
+    }
+    var ex = W.exercises.filter(function (e) { return String(e.id) === String(n); })[0];
+    if (!ex) return viewNotFound();
+    var html2 = pageHead('Exercise ' + ex.id + ' of ' + W.exercises.length, ex.title, 'Time required: ' + ex.time);
+    html2 += '<section class="card">' + paras(ex.body) +
+      (ex.list ? '<ol>' + ex.list.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ol>' : '') +
+      paras(ex.after) + '</section>';
+    if (ex.weeks) html2 += '<section class="card"><h2>Thirteen weeks</h2>' + ex.weeks.map(function (w, i) {
+      return yesNo('Week ' + (i + 1) + ': ' + w + '. Done?', workbookPath(ex, 'week' + (i + 1))) +
+        field('What I noticed', workbookPath(ex, 'noticed' + (i + 1)), { type: 'text' });
+    }).join('') + '</section>';
+    if (ex.fields.length) html2 += '<section class="card"><h2>My answers</h2>' + ex.fields.map(function (f) {
+      return field(f.label, workbookPath(ex, f.key), { type: f.type, rows: f.rows || 3 });
+    }).join('') + '</section>';
+    if (ex.link) html2 += '<div class="btn-row"><a class="btn" href="' + ex.link.href + '">' + esc(ex.link.label) + '</a></div>';
+    var next = W.exercises.filter(function (e) { return e.id === ex.id + 1; })[0];
+    html2 += nextLink(next ? '#/workbook/' + next.id : '#/workbook', next ? 'Next: ' + next.title : 'Back to the workbook');
+    return html2;
+  }
+
+  /* Epilogue */
+  function viewEpilogue() {
+    var E = C.epilogue;
+    var html = pageHead(E.label, E.title, E.leader);
+    html += '<section class="card story">' + E.summary.map(function (t) { return '<p class="story-text">' + esc(t) + '</p>'; }).join('') + '</section>';
+    html += '<section class="card"><blockquote>' + esc(E.quote) + '</blockquote><p class="small muted">' + esc(E.quoteBy) + '</p></section>';
+    html += '<section class="card"><p>' + esc(E.closing) + '</p></section>';
+    html += nextLink('#/chapters', 'Back to chapters');
     return html;
   }
 
@@ -1143,6 +1200,17 @@
     }).join('');
     if (closingAnswers) r += '<h2>' + esc(C.closing.title) + '</h2><div class="entry">' + closingAnswers + '</div>';
 
+    var wb = C.workbook.exercises.map(function (ex) {
+      var d = state.workbook['ex' + ex.id] || {};
+      var rows = ex.fields.filter(function (f) { return has(d[f.key]); }).map(function (f) { return '<p><strong>' + esc(f.label) + '</strong><br>' + nl2br(d[f.key]) + '</p>'; });
+      (ex.weeks || []).forEach(function (w, i) {
+        var done = d['week' + (i + 1)], note = d['noticed' + (i + 1)];
+        if (done || has(note)) rows.push('<p><strong>Week ' + (i + 1) + ': ' + esc(w) + '</strong><br>' + (done === 'yes' ? 'Done' : done === 'no' ? 'Not done' : '') + (has(note) ? (done ? '. ' : '') + esc(note) : '') + '</p>');
+      });
+      return rows.length ? '<div class="entry"><h3>Exercise ' + ex.id + ': ' + esc(ex.title) + '</h3>' + rows.join('') + '</div>' : '';
+    }).join('');
+    if (wb) r += '<h2>' + esc(C.workbook.title) + '</h2>' + wb;
+
     if (state.reviews.length) r += '<h2>Plan reviews</h2>' + state.reviews.map(function (v) { return '<div class="entry"><h3>' + esc(fmtDate(v.date)) + ', day ' + v.day + '</h3><div>' + nl2br(v.text) + '</div></div>'; }).join('');
     return r;
   }
@@ -1431,6 +1499,8 @@
       case 'chapters': html = viewChapters(); break;
       case 'chapter': html = viewChapter(r.a, r.b); break;
       case 'closing': html = viewClosing(); break;
+      case 'workbook': html = viewWorkbook(r.a); break;
+      case 'epilogue': html = viewEpilogue(); break;
       case 'plan': html = viewPlan(); break;
       case 'log': html = r.a === 'new' ? viewLogForm(null) : r.a === 'edit' ? viewLogForm(r.b) : viewLog(); break;
       case 'checkin': html = viewCheckin(r.a); break;
@@ -1438,7 +1508,7 @@
       default: html = viewNotFound();
     }
     app.innerHTML = html;
-    var navKey = { start: 'chapters', chapter: 'chapters', closing: 'chapters', plan: 'home' }[r.name] || r.name;
+    var navKey = { start: 'chapters', chapter: 'chapters', closing: 'chapters', workbook: 'chapters', epilogue: 'chapters', plan: 'home' }[r.name] || r.name;
     document.querySelectorAll('[data-nav]').forEach(function (a) {
       if (a.dataset.nav === navKey) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
     });
