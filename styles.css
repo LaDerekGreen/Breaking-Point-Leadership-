@@ -138,6 +138,7 @@ main { max-width: 760px; margin: 0 auto; padding: 20px 16px 32px; outline: none;
 }
 .pinned .kicker { color: inherit; opacity: .75; }
 .pinned blockquote { margin: 0 0 8px; font-family: var(--serif); font-size: 1.35rem; line-height: 1.35; }
+.card blockquote { margin: 0 0 8px; font-family: var(--serif); font-size: 1.2rem; line-height: 1.4; }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 0; }
 .tag { font-size: .8rem; padding: 3px 10px; border-radius: 999px; border: 1px solid currentColor; text-decoration: none; opacity: .9; }
 
