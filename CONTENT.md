@@ -10,7 +10,7 @@ Each chapter looks like this:
 {
   id: 1,
   breakingPoint: 'comfort',          // one of: comfort, convenience, trust, standing, self
-  title: 'Comfort',
+  title: 'The One Vote That Cost Him Nothing',   // the book's chapter title
   leader: 'Marcus',
   summary: 'Marcus votes fairly in one blind review, then ...',
   focus: 'Who I sponsor and who I overlook.',
@@ -22,6 +22,7 @@ Each chapter looks like this:
     'Question two?'
   ],
   actionStep: '...',                 // the book's action step
+  planCoach: '...',                  // the book's "Action plan" request for the coach
   placeholder: true                  // set to false once the text is final
 }
 ```

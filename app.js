@@ -414,7 +414,8 @@
           '2. Help me build a 90 day plan with no more than ' + MAX_COMMITMENTS + ' commitments. If I already have a plan, help me decide what to keep, change or replace.\n' +
           '3. Each commitment must state what I will do differently, how I will measure it, and who can tell me if I slip (a role, not a name).\n' +
           '4. Push back on anything vague or anything I cannot measure. Push back if I take on too much.\n' +
-          '5. Include the book\'s action step if it fits. I decide the final plan.',
+          '5. Include the book\'s action step if it fits. I decide the final plan.' +
+          (c.planCoach ? '\n6. The book asks you to do this: ' + c.planCoach : ''),
           '90 DAY PLAN\n' +
           'COMMITMENT 1: (what I will do differently)\n' +
           'MEASURE: (how I will measure it)\n' +
@@ -950,7 +951,8 @@
 
     if (step === 'plan') {
       html += '<section class="card"><h2>Action plan</h2><p>Build a 90 day plan with no more than ' + MAX_COMMITMENTS + ' commitments. Each one states what you will do differently, how you will measure it, and who can tell you if you slip.</p>' +
-        '<div class="callout"><p class="kicker">The book\'s action step</p><p>' + esc(c.actionStep) + '</p></div>' + draft +
+        '<div class="callout"><p class="kicker">The book\'s action step</p><p>' + esc(c.actionStep) + '</p></div>' +
+        (c.planCoach ? '<p class="small muted">Your coach will also follow the book\'s request: "' + esc(c.planCoach) + '"</p>' : '') + draft +
         (state.plan ? '<p class="small muted">You have an active plan (day ' + planDay() + '). The coach will see it and help you decide what to keep or change.</p>' : '') + '</section>';
       html += promptCard('plan', id);
       html += '<section class="card"><h3>Paste the coach\'s plan</h3>' +
