@@ -56,6 +56,7 @@ window.BPAC_CONTENT = {
       { key: 'protecting', label: 'What were you protecting?' },
       { key: 'cost',       label: 'Who paid the cost? (Roles, not names.)' }
     ],
+    actionStep: 'Before you read Chapter One, write down three decisions from the last two years you would make differently now. Next to each, note who was pushing on you and what you were protecting. Keep the page. You will need it.',
     reflectionQuestions: [
       'If someone ran an honest review of my leadership tomorrow, what would I be most afraid it found?',
       'Who on my team has stopped bringing me ideas, and when did it start?',
@@ -430,6 +431,200 @@ window.BPAC_CONTENT = {
     quoteBy: 'Walt',
     closing: 'Leaders do not need better values. They need to see the distance between the values they write down and the lives their people actually live under them. Calvin needed a letter to see it. The next leader should not have to wait for one.'
   },
+
+  /*
+    Reading pages: Before the System Arrives, A Letter to the Reader and the
+    Glossary. The text is the book's, with italics removed.
+  */
+  pages: [
+    {
+      id: 'monday',
+      mark: 'M',
+      title: 'Before the System Arrives',
+      label: 'What you can do on Monday',
+      card: 'Ten steps any leader can start this week, without a system.',
+      sections: [
+        {
+          heading: '',
+          paragraphs: [
+            'Most leaders reading this book do not have SI. Their organization may never build it, or may take years to. That is not a reason to wait. Every leader in these pages, Calvin included, had choices available to them long before any system showed up, and the ones who grew used them.',
+            'There is one more lesson to carry into this chapter. The observer in Chapter Four built a placement panel that worked. Promotions rose. Morale rose. When he left, it disappeared within a cycle, because it lived in one person. Everything below is built to survive that test. Do it yourself first, then build it so it keeps running after you are gone.'
+          ]
+        },
+        {
+          heading: '1. Write Your Breaking Point in One Sentence',
+          paragraphs: [
+            'Calvin\'s plan started with a single line: When pressure comes from above, I stop listening and start deciding. Writing it down made it real in a way no report could.',
+            'Do the same. Think about the last three times you made a decision you regret. What was happening around you? Who was pushing? What were you protecting? The answer is usually one of five things this book has already named: comfort, convenience, misplaced trust, fear of standing alone, or your own seat. Write yours in one sentence, starting with "When." Keep it where you will see it before hard meetings.',
+            'If you cannot think of a breaking point, that is not good news. It means you have a blind spot where your breaking point should be.'
+          ]
+        },
+        {
+          heading: '2. Ask Every Vantage Point',
+          paragraphs: [
+            'Calvin found out what sixteen people thought of him from a stranger. You can find out sooner. Choose one question and ask it of your boss, three peers, and everyone who reports to you: What do I do that makes it harder for you to tell me the truth?',
+            'Do not collect the answers yourself. Ask someone neutral to gather them, and if any group is smaller than five people, have the answers combined with a larger group so no one can be traced. That one step fixes the flaw that silenced the observer\'s managers.',
+            'Then compare the three views. Where your boss, your peers, and your team describe the same leader, you have your strengths. Where they describe different leaders, you have your blind spot.'
+          ]
+        },
+        {
+          heading: '3. Ask Two Questions Before You Give an Opinion',
+          paragraphs: [
+            'This is Calvin\'s first commitment, and it is the cheapest change in this book. When someone brings you a recommendation, ask at least two questions before you say what you think. How will this fail? What would you need from me? If you cannot think of two questions, you do not understand the idea well enough to reject it.',
+            'Count them. Elena did. Your people will too.'
+          ]
+        },
+        {
+          heading: '4. Name the Pressure Out Loud',
+          paragraphs: [
+            'Every leader in this book was under pressure, and almost none of them said so. The pressure came out sideways instead: as impatience, as vague instructions, as cuts that landed on the people least able to push back.',
+            'When pressure is coming from above, tell your team what it is. The CFO wants costs down eight percent this quarter. That is why I am pushing. People can work with a constraint they understand. They cannot work with a mood.'
+          ]
+        },
+        {
+          heading: '5. Translate Guidance on the Way Down',
+          paragraphs: [
+            'The observer watched guidance pass straight through every layer of his organization untouched, until the most junior people received a message written for the top and were left to guess what it meant for them.',
+            'Every level is supposed to add context. Before you pass anything down, answer three questions in writing: What does this mean for my team specifically? What should they stop doing to make room for it? How will we know it worked? Then test it. Ask the most junior person affected to explain it back to you. If they cannot, you have not finished your job.'
+          ]
+        },
+        {
+          heading: '6. Choose the Few Things',
+          paragraphs: [
+            'Walt\'s advice to Calvin applies to every leader who walks into an organization and sees everything that is broken. You will not change a culture in two years by being right about all of it. Try, and you will either burn out angry or give the people who resist change a reason to stop you.',
+            'Pick three things you can change within your actual authority. Write them down. Do those well, and let the rest wait. Three changes that last are worth more than thirty that disappear when you leave.'
+          ]
+        },
+        {
+          heading: '7. Put the Comparison on the Table',
+          paragraphs: [
+            'Renata did not lose because anyone argued against her. She lost because no one put the numbers side by side.',
+            'For every selection you are part of, a hire, a promotion, an assignment, a seat on a board, insist on a one page comparison of each finalist\'s documented performance before anyone discusses fit, presence, or potential. If the room picks the weaker record, ask that the reason be written down in terms of performance. A real reason costs nothing to write. A comfortable one rarely survives being written.'
+          ]
+        },
+        {
+          heading: '8. Develop the Next Leader on Purpose',
+          paragraphs: [
+            'The observer saw strong performers held back for years because they were good at their current job. Units kept them in place to patch their own weak spots, and on paper those people looked stuck.',
+            'Review the career path of everyone on your team at least once a year. Ask one question for each person: Is their next assignment building toward their next level, or toward my convenience? When a strong performer has mastered a role, move them up and give the role to someone who can grow into it. That is what teaching, coaching, and mentoring actually look like when they cost you something.'
+          ]
+        },
+        {
+          heading: '9. Protect the Person Who Speaks Up',
+          paragraphs: [
+            'The transfers the observer watched were handled correctly on paper, and they still failed, because the hallway carried a story the paperwork never did.',
+            'When someone on your team raises a serious concern, the policy is the beginning of your job, not the end. Watch what happens to that person for the next ninety days. Are their assignments shrinking? Are their reviews dropping? Are peers treating them differently? If they move to a new team, call the receiving leader yourself and make sure the only story that arrives is the one in the formal record. Then keep checking.'
+          ]
+        },
+        {
+          heading: '10. Build It to Outlast You',
+          paragraphs: [
+            'This is the step most good leaders skip, and it is the reason most good practices die.',
+            'For anything on this list that works, write it into a process someone else owns. Give it a name, a schedule, and a measure. Put it in the handover notes for whoever replaces you. Ask your successor, before you leave, whether they will keep it, and if not, why. A practice that depends on one person\'s conviction is a personality. A practice written into how the organization works is a system.'
+          ]
+        },
+        {
+          heading: 'What a System Adds',
+          paragraphs: [
+            'None of the steps above requires a machine. Every one of them is something a determined leader can start this week.',
+            'What SI adds is the part no individual can sustain: doing all of it continuously, across every decision, without getting tired, without forgetting, and without leaving when the leader who started it moves on. SI is these ten steps running every day instead of once.',
+            'You do not have to wait for it. Start with the sentence.'
+          ]
+        }
+      ]
+    },
+    {
+      id: 'letter',
+      mark: 'L',
+      title: 'A Letter to the Reader',
+      label: 'From LaDerek Green',
+      card: 'Three things the author asks of you.',
+      sections: [
+        {
+          heading: '',
+          paragraphs: [
+            'If you have read this far, you have watched a lot of good people break.',
+            'Marcus chose comfort. Priya chose convenience. Devon trusted the wrong room. Renata\'s committee chose silence. Grace nearly chose her own seat over the people she had protected for twenty years. Calvin opened a letter that told him sixteen people were afraid of him. Warren Hale went quiet in his office and let someone else take the hits.',
+            'None of them set out to do harm. That is the point I most want you to carry out of this book. The leaders who do the most damage are rarely the ones who mean to. They are capable, experienced, often admired people who reach a moment where protecting something of their own quietly outweighs protecting someone else, and who never notice the trade being made.',
+            'I have spent my career around leaders like that. I have worked for some. I have tried to save a few. And on more than one occasion, I have been one. There were weeks when I stopped listening because the pressure from above was loud. There were times I said yes to more than I should have carried because I wanted the organization to work, and I let others assume I could carry it. There were rooms I should have stayed out of and conversations I should have had sooner. I did not see most of those moments clearly while I was in them. I saw them later, the way Calvin saw his, when someone finally put the pattern in front of me.',
+            'That is why this book exists. Not to tell you that you are a bad leader. You are probably a good one. That is exactly why your breaking point is dangerous. Good leaders are trusted, and trusted leaders are rarely checked.'
+          ]
+        },
+        {
+          heading: 'What I Am Asking of You',
+          paragraphs: [
+            'I am asking three things.',
+            'First, find your sentence. Sit down this week with the first exercise in the workbook and write your breaking point in your own hand, beginning with the word "When." If it flatters you, write it again. Put it somewhere you will see it before the hard meetings. You will be surprised how often you need it.',
+            'Second, ask the people below you. Your boss sees one leader. Your peers see another. The people who report to you see the one who matters most, and they are the least likely to tell you what they see unless you make it safe. Ask, protect their answers, and then tell them what you heard and what you will change. That single act will teach your team more about your character than anything you say in a meeting.',
+            'Third, when you see someone else break, do not look away. It may be a peer who has stopped speaking up. It may be someone who reports to you whose team has gone quiet. It may be your own boss, hiding in an office while the organization drifts. Nathan did not have authority over Warren. What he had was knowledge of the man, and the courage to use it with care. You almost always have more influence than your title suggests. Use it to bring people back, not to bury them.'
+          ]
+        },
+        {
+          heading: 'What a System Can and Cannot Do',
+          paragraphs: [
+            'This book has argued for a system that watches leaders the way leaders have always watched everyone else. I believe in that argument. Some of you will build something like it. Many of you will never have it.',
+            'But no system will ever do the most important part. A report can show Calvin his pattern. It cannot make him pick up a pen. A finding can show Grace who absorbed the cost. It cannot make her call her advisors in and ask them to argue against her. A record can show Marcus the name he never sponsored. It cannot buy the lunch.',
+            'The system can hold up the mirror. Only you can decide what to do with what you see.'
+          ]
+        },
+        {
+          heading: 'The Envelope',
+          paragraphs: [
+            'At the beginning of this book, Calvin opened an envelope he did not expect. Most leaders never receive one. Nobody writes the letter, nobody runs the review, and the pattern keeps running until it costs someone a career, a promotion, a sense of safety at work, or the belief that telling the truth matters.',
+            'You do not have to wait for the envelope. You can write it yourself, tonight, by being honest about the last three decisions you regret and what they had in common. You can ask your team to write it with you. And when it arrives, as it eventually does for every leader who stays in the work long enough, you can read it the way Calvin finally did: not as a verdict, but as the first honest picture anyone ever gave you.',
+            'Every leader has a breaking point. The ones worth following are the ones who know where theirs is, tell the people around them, and keep coming back.',
+            'Thank you for reading. Now go find your sentence.',
+            'LaDerek Green'
+          ]
+        }
+      ]
+    },
+    {
+      id: 'glossary',
+      mark: 'G',
+      title: 'Glossary',
+      label: 'Blind spots and breaking points',
+      card: 'The terms this book uses, and where each one appears.',
+      sections: [
+        {
+          heading: 'Moral Laziness',
+          paragraphs: [
+            'Knowing what\'s right, having proven you can do it, and declining the effort to sustain it once no one is watching. (Chapter One, Marcus)'
+          ]
+        },
+        {
+          heading: 'Convenience Over Fairness',
+          paragraphs: [
+            'Choosing what\'s easiest to execute and defend to your own boss over what\'s fair to the people under you. (Chapter Two, Priya)'
+          ]
+        },
+        {
+          heading: 'Misplaced Trust',
+          paragraphs: [
+            'Trust placed in a relationship or system that was never built to hold it, because no one defined its limits. (Chapter Three, Devon)'
+          ]
+        },
+        {
+          heading: 'Moral Cowardice',
+          paragraphs: [
+            'Having the information to make the right call and making the safe one, because defending the right one would cost you personally. (Chapter Four, Renata\'s committee)'
+          ]
+        },
+        {
+          heading: 'Self-Preservation',
+          paragraphs: [
+            'When protecting your people and protecting your seat collide, and no one is tracking which you choose. (Chapter Five, Grace)'
+          ]
+        },
+        {
+          heading: 'Blind Spot',
+          paragraphs: [
+            'A truth about a leader that the people around them can see and the leader cannot. Every breaking point above starts as one. (Prologue, Calvin)'
+          ]
+        }
+      ]
+    }
+  ],
 
   /*
     Chapter modules. Self-assessment checklists, reflection questions,
