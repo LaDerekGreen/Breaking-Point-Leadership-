@@ -3,6 +3,10 @@
 A free companion web app to the book **Breaking Point Leadership** by LaDerek Green.
 Readers find their leadership breaking point, then build and keep a 90-day development plan, chapter by chapter, with an AI accountability coach.
 
+## Gap Reader
+
+The [`gap-reader/`](gap-reader/) folder holds **Gap Reader**, a separate Next.js application with two strictly separated products: the Organizational Gap Reader and the Personal Gap Reader. See [gap-reader/README.md](gap-reader/README.md). The static Accountability Coach below is unchanged.
+
 ## How it works
 
 * **No AI costs.** The app never calls an AI service. For each step it builds a complete coaching prompt (coach instructions, the chapter's story and questions, and the reader's own saved answers). The reader taps **Copy prompt**, pastes it into their own free Claude account, has the conversation there, and pastes the coach's final block back into the app.

@@ -1,0 +1,468 @@
+// Organizational Gap Reader schema.
+//
+// This schema lives in the `org` Postgres schema and is reached only with the
+// gr_org role (ORG_DATABASE_URL). It has no model, foreign key, view or join
+// that refers to anything in prisma/personal/schema.prisma. See docs/rules.md.
+//
+// What is deliberately absent:
+//   * No field for email bodies, chat, location, health, mood or private life.
+//   * No user ID on SurveyResponse. Who took a survey (SurveyInvitation) is
+//     never linked to what they answered (SurveyResponse).
+//   * No reason or state on AvailabilityFlag, only a date to wait until.
+//   * No investigation, case, or routing tables. Matters of law or policy
+//     leave the Gap Reader through the exclusion gate (GateEvent).
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../generated/org"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("ORG_DATABASE_URL")
+}
+
+enum Role {
+  program_lead
+  leader
+  respondent
+  senior_reviewer
+  board_reviewer
+}
+
+enum Vantage {
+  above
+  beside
+  below
+}
+
+/// The Five Steps of Escalation, in order, plus the closed state.
+enum FindingState {
+  PRIVATE_SURFACING
+  CORRECTION_WINDOW
+  DOCUMENTED_RECORD
+  SENIOR_REVIEW
+  BOARD_REVIEW
+  RESOLVED
+}
+
+enum ResponseKind {
+  context
+  contest
+  plan
+}
+
+enum DecisionOutcome {
+  accepted
+  dismissed
+  deferred
+  approved
+  declined
+}
+
+enum CommitmentType {
+  promotion
+  development
+  culture
+  other
+}
+
+enum CycleStatus {
+  draft
+  open
+  closed
+}
+
+enum ProposalKind {
+  advance
+  resolve
+}
+
+// ---------------------------------------------------------------------------
+// Auth.js tables (org instance only)
+// ---------------------------------------------------------------------------
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  emailVerified DateTime?
+  image         String?
+  roles         Role[]    @default([respondent])
+  /// Link to the admin directory. Names live only on Person.displayName.
+  personId      String?   @unique
+  person        Person?   @relation(fields: [personId], references: [id])
+  accounts      Account[]
+  sessions      Session[]
+  acknowledgments NoticeAcknowledgment[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+// ---------------------------------------------------------------------------
+// Settings and Notice (Days One Through Thirty)
+// ---------------------------------------------------------------------------
+
+/// Single row (id = 1). CHECK constraints in the migration enforce the floors:
+/// anonymityThreshold >= 8 and correctionWindowDays >= 90.
+model OrgSettings {
+  id                   Int      @id @default(1)
+  organizationName     String   @default("Your organization")
+  anonymityThreshold   Int      @default(8)
+  correctionWindowDays Int      @default(90)
+  aiProvider           String?
+  aiModel              String?
+  /// AES-256-GCM under APP_ENCRYPTION_KEY. Never returned to any page.
+  aiKeyCiphertext      String?
+  /// The organization's own reporting channels, shown when the gate fires.
+  reportingChannels    String   @default("")
+  /// The board turns on the chief executive's own report.
+  ceoReportsEnabled    Boolean  @default(false)
+  /// Keys of the "first ninety days" checklist lines the program lead has marked done.
+  checklistDone        String[] @default([])
+  updatedAt            DateTime @updatedAt
+}
+
+model Notice {
+  id              String                 @id @default(cuid())
+  version         Int                    @unique
+  reads           String
+  neverReads      String
+  publishedAt     DateTime?
+  publishedById   String?
+  createdAt       DateTime               @default(now())
+  acknowledgments NoticeAcknowledgment[]
+}
+
+model NoticeAcknowledgment {
+  id             String   @id @default(cuid())
+  userId         String
+  noticeId       String
+  acknowledgedAt DateTime @default(now())
+  user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  notice         Notice   @relation(fields: [noticeId], references: [id])
+
+  @@unique([userId, noticeId])
+}
+
+// ---------------------------------------------------------------------------
+// Admin directory. The only place a name exists.
+// ---------------------------------------------------------------------------
+
+model Person {
+  id               String  @id @default(cuid())
+  /// The organization's own identifier, used in imports.
+  externalId       String  @unique
+  /// Anonymous ID. The only identifier ever passed to the AI adapter.
+  anonId           String  @unique @default(uuid())
+  /// Admin directory only. Never in a report, never sent to the AI adapter.
+  displayName      String
+  roleTitle        String
+  jobLevel         String?
+  managerId        String?
+  manager          Person? @relation("ReportsTo", fields: [managerId], references: [id])
+  reports          Person[] @relation("ReportsTo")
+  isChiefExecutive Boolean @default(false)
+  user             User?
+  createdAt        DateTime @default(now())
+}
+
+// ---------------------------------------------------------------------------
+// Records the organization already keeps (A2). People appear by role and
+// anonymous reference (subjectRef), never by name.
+// ---------------------------------------------------------------------------
+
+model ImportBatch {
+  id           String   @id @default(cuid())
+  kind         String
+  fileName     String
+  rowCount     Int
+  importedById String
+  importedAt   DateTime @default(now())
+}
+
+model DecisionRecord {
+  id                     String           @id @default(cuid())
+  leaderId               String
+  type                   String
+  decidedAt              DateTime
+  /// When the request reached the leader, if the record notes it (approval latency).
+  requestedAt            DateTime?
+  affectedRole           String
+  documentedReason       String
+  alternativesConsidered String
+  outcome                DecisionOutcome?
+  shift                  String?
+  team                   String?
+  tenureBand             String?
+  /// Only where the documented decision record includes it.
+  minutesBeforeOpinion   Int?
+  importBatchId          String
+  createdAt              DateTime         @default(now())
+
+  @@index([leaderId])
+}
+
+model PromotionRecord {
+  id            String   @id @default(cuid())
+  subjectRef    String
+  candidateRole String
+  approvalDate  DateTime
+  effectiveDate DateTime
+  importBatchId String
+
+  @@index([subjectRef])
+}
+
+model Evaluation {
+  id             String          @id @default(cuid())
+  leaderId       String
+  subjectRef     String
+  evaluatedAt    DateTime
+  rating         Float
+  commitmentText String?
+  commitmentType CommitmentType?
+  commitmentDue  DateTime?
+  /// For culture commitments: which survey statement (1 to 8) it speaks to.
+  surveyItem     Int?
+  importBatchId  String
+
+  @@index([leaderId])
+  @@index([subjectRef])
+}
+
+model StretchAssignment {
+  id            String   @id @default(cuid())
+  leaderId      String
+  assignedAt    DateTime
+  recipientRole String
+  recipientRef  String?
+  tenureBand    String
+  resultRating  Float?
+  importBatchId String
+
+  @@index([leaderId])
+}
+
+model Complaint {
+  id            String   @id @default(cuid())
+  leaderId      String
+  filedAt       DateTime
+  filerRole     String
+  filerRef      String
+  /// The Person who filed it, when the filer has an account (for A7).
+  filerPersonId String?
+  /// Emptied when the exclusion gate fires. The matter leaves the Gap Reader.
+  text          String
+  excluded      Boolean  @default(false)
+  importBatchId String
+  comparison    ComplaintComparison?
+
+  @@index([leaderId])
+  @@index([filerRef])
+}
+
+/// A7: the complaint beside the documented record, shown privately to the filer.
+model ComplaintComparison {
+  id           String    @id @default(cuid())
+  complaintId  String    @unique
+  complaint    Complaint @relation(fields: [complaintId], references: [id], onDelete: Cascade)
+  snapshot     Json
+  firstViewedAt DateTime?
+  filerContext String?
+  withdrawnAt  DateTime?
+  createdAt    DateTime  @default(now())
+}
+
+// ---------------------------------------------------------------------------
+// Three Vantage Point Survey (Exercise 2)
+// ---------------------------------------------------------------------------
+
+model SurveyCycle {
+  id          String      @id @default(cuid())
+  number      Int         @unique
+  name        String
+  status      CycleStatus @default(draft)
+  openedAt    DateTime?
+  closedAt    DateTime?
+  createdAt   DateTime    @default(now())
+  invitations SurveyInvitation[]
+  responses   SurveyResponse[]
+  selfRatings LeaderSelfRating[]
+}
+
+/// Who was asked and whether they answered. Never linked to the answers.
+model SurveyInvitation {
+  id          String      @id @default(cuid())
+  cycleId     String
+  cycle       SurveyCycle @relation(fields: [cycleId], references: [id], onDelete: Cascade)
+  leaderId    String
+  userId      String
+  completed   Boolean     @default(false)
+
+  @@unique([cycleId, leaderId, userId])
+}
+
+/// Anonymous. No user ID, no name, no timestamp, random UUID.
+model SurveyResponse {
+  id         String      @id @default(uuid())
+  cycleId    String
+  cycle      SurveyCycle @relation(fields: [cycleId], references: [id], onDelete: Cascade)
+  leaderId   String
+  vantage    Vantage
+  jobLevel   String?
+  answers    Int[]
+  comments   String[]
+  openAnswer String?
+
+  @@index([cycleId, leaderId])
+}
+
+model LeaderSelfRating {
+  id        String      @id @default(cuid())
+  cycleId   String
+  cycle     SurveyCycle @relation(fields: [cycleId], references: [id], onDelete: Cascade)
+  leaderId  String
+  answers   Int[]
+  createdAt DateTime    @default(now())
+
+  @@unique([cycleId, leaderId])
+}
+
+/// Voluntary. Passed to the leader only as a timing recommendation.
+/// There is no column for a reason, mood, health or state, by design.
+model AvailabilityFlag {
+  id             String   @id @default(cuid())
+  userId         String
+  leaderPersonId String
+  waitUntil      DateTime
+  createdAt      DateTime @default(now())
+
+  @@index([leaderPersonId])
+}
+
+// ---------------------------------------------------------------------------
+// Findings and the Five Steps of Escalation
+// ---------------------------------------------------------------------------
+
+model Finding {
+  id                 String          @id @default(cuid())
+  leaderId           String
+  patternKey         String
+  cycleId            String?
+  /// Computed metrics only. Anonymous IDs, no names, no free text.
+  metrics            Json
+  /// The report the leader sees. Senior and board reviewers see this same text.
+  report             String
+  state              FindingState    @default(PRIVATE_SURFACING)
+  /// When resolved, the last step reached. Decides who can still see it.
+  resolvedFromState  FindingState?
+  deliveredAt        DateTime        @default(now())
+  firstOpenedAt      DateTime?
+  windowEndsAt       DateTime?
+  contested          Boolean         @default(false)
+  contestReadById    String?
+  contestReadAt      DateTime?
+  /// The system may only propose. A human confirms.
+  proposal           ProposalKind?
+  proposalAt         DateTime?
+  /// Measured by the next cycle's deterministic metrics. Null until measured.
+  patternPersists    Boolean?
+  persistenceMetrics Json?
+  persistenceAt      DateTime?
+  createdAt          DateTime        @default(now())
+  updatedAt          DateTime        @updatedAt
+  responses          LeaderResponse[]
+  judgments          Judgment[]
+
+  @@index([leaderId])
+  @@index([state])
+}
+
+/// The leader's own context. Counts in the leader's favor and travels with the finding.
+model LeaderResponse {
+  id        String       @id @default(cuid())
+  findingId String
+  finding   Finding      @relation(fields: [findingId], references: [id], onDelete: Cascade)
+  kind      ResponseKind
+  text      String
+  createdAt DateTime     @default(now())
+}
+
+/// Independent human judgment at Senior Human Review or Board and Outside Review.
+model Judgment {
+  id             String       @id @default(cuid())
+  findingId      String
+  finding        Finding      @relation(fields: [findingId], references: [id], onDelete: Cascade)
+  stage          FindingState
+  reviewerUserId String
+  text           String
+  createdAt      DateTime     @default(now())
+}
+
+model ReviewerAssignment {
+  id                   String   @id @default(cuid())
+  leaderPersonId       String   @unique
+  seniorReviewerUserId String
+  assignedById         String
+  createdAt            DateTime @default(now())
+}
+
+/// A5: only that the gate fired, the date, and the record IDs. Nothing else.
+model GateEvent {
+  id        String   @id @default(cuid())
+  firedAt   DateTime @default(now())
+  recordIds String[]
+}
+
+/// Every finding generated, report delivered, escalation step and human decision.
+model AuditLog {
+  id          String   @id @default(cuid())
+  at          DateTime @default(now())
+  actorUserId String?
+  /// "human" or "system". The AI is never an actor.
+  actorKind   String
+  action      String
+  entityType  String
+  entityId    String?
+  reason      String?
+  meta        Json?
+
+  @@index([at])
+}
