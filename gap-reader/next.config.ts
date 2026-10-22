@@ -10,6 +10,9 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   serverExternalPackages: ["@prisma/client", "nodemailer"],
+  // The two Prisma clients are generated into ./generated, outside node_modules.
+  // Include their query engines in every serverless function.
+  outputFileTracingIncludes: { "/**": ["./generated/org/**/*", "./generated/personal/**/*"] },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },
