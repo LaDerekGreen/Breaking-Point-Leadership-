@@ -18,7 +18,7 @@ You can also install Neon from the Vercel Marketplace (Storage tab of your Verce
 
 ## 2. Create the two schemas and two roles
 
-Choose two strong passwords (`openssl rand -base64 24` twice), then run, from the `gap-reader` folder:
+Choose two strong passwords (`openssl rand -hex 16` twice; hex needs no escaping in a connection string), then run, from the `gap-reader` folder:
 
 ```sh
 psql "<owner direct connection string>" \
@@ -27,7 +27,7 @@ psql "<owner direct connection string>" \
   -f db/setup.sql
 ```
 
-This creates the `org` schema owned by the `gr_org` role and the `personal` schema owned by the `gr_personal` role, each refused the other's schema. The application never uses the owner role.
+This creates the `gr_org` and `gr_personal` roles and the `org` and `personal` schemas. Each role can use only its own schema and is refused the other's; the tables each role creates through its migrations belong to it. The application never uses the owner role.
 
 If you prefer two separate databases, create two Neon projects and run the org half of `db/setup.sql` in one and the personal half in the other.
 

@@ -33,11 +33,20 @@ ALTER ROLE gr_personal PASSWORD :personal_password;
 -- Nobody gets anything by default.
 REVOKE ALL ON SCHEMA public FROM PUBLIC;
 
-CREATE SCHEMA IF NOT EXISTS org AUTHORIZATION gr_org;
-CREATE SCHEMA IF NOT EXISTS personal AUTHORIZATION gr_personal;
+-- The connecting role (the database owner) creates both schemas and gives
+-- each application role use of its own schema only. This works for a
+-- non-superuser owner, as on Neon or Supabase, on every Postgres version:
+-- Postgres 16 and later refuse "CREATE SCHEMA ... AUTHORIZATION <role>" unless
+-- the creator can SET ROLE to that role. Each role still owns every table it
+-- creates in its schema through its migrations.
+CREATE SCHEMA IF NOT EXISTS org;
+CREATE SCHEMA IF NOT EXISTS personal;
 
 REVOKE ALL ON SCHEMA org FROM PUBLIC;
 REVOKE ALL ON SCHEMA personal FROM PUBLIC;
+
+GRANT USAGE, CREATE ON SCHEMA org TO gr_org;
+GRANT USAGE, CREATE ON SCHEMA personal TO gr_personal;
 
 -- Belt and braces: each role is explicitly denied the other's schema.
 REVOKE ALL ON SCHEMA personal FROM gr_org;

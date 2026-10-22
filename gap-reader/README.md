@@ -46,7 +46,7 @@ This creates:
 | `org` | `gr_org` | Organizational Gap Reader | `ORG_DATABASE_URL` |
 | `personal` | `gr_personal` | Personal Gap Reader | `PERSONAL_DATABASE_URL` |
 
-Each role owns its own schema and is explicitly refused the other one. To use two separate databases instead, run the org half of `db/setup.sql` in one database and the personal half in the other, and point the two connection strings at them. The application does not care which.
+Each role can use and create tables only in its own schema, and is explicitly refused the other one. The script runs as the database owner, so it works on hosted Postgres (Neon, Supabase) where that owner is not a superuser. To use two separate databases instead, run the org half of `db/setup.sql` in one database and the personal half in the other, and point the two connection strings at them. The application does not care which.
 
 ### 3. Apply the migrations
 

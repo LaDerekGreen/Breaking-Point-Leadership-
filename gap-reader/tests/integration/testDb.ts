@@ -44,10 +44,12 @@ export async function prepareTestDb(): Promise<void> {
     `ALTER ROLE gr_org PASSWORD '${ORG_PW}'`,
     `ALTER ROLE gr_personal PASSWORD '${PERSONAL_PW}'`,
     `REVOKE ALL ON SCHEMA public FROM PUBLIC`,
-    `CREATE SCHEMA org AUTHORIZATION gr_org`,
-    `CREATE SCHEMA personal AUTHORIZATION gr_personal`,
+    `CREATE SCHEMA org`,
+    `CREATE SCHEMA personal`,
     `REVOKE ALL ON SCHEMA org FROM PUBLIC`,
     `REVOKE ALL ON SCHEMA personal FROM PUBLIC`,
+    `GRANT USAGE, CREATE ON SCHEMA org TO gr_org`,
+    `GRANT USAGE, CREATE ON SCHEMA personal TO gr_personal`,
   ];
   for (const s of sql) await admin.$executeRawUnsafe(s);
   await admin.$disconnect();
