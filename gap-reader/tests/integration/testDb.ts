@@ -52,8 +52,11 @@ export async function prepareTestDb(): Promise<void> {
   for (const s of sql) await admin.$executeRawUnsafe(s);
   await admin.$disconnect();
 
-  for (const [schema, url, env] of [["org", urls.org, "ORG_DATABASE_URL"], ["personal", urls.personal, "PERSONAL_DATABASE_URL"]] as const) {
-    execSync(`npx prisma migrate deploy --schema prisma/${schema}/schema.prisma`, { env: { ...process.env, [env]: url }, stdio: "pipe" });
+  for (const [schema, url, prefix] of [["org", urls.org, "ORG"], ["personal", urls.personal, "PERSONAL"]] as const) {
+    execSync(`npx prisma migrate deploy --schema prisma/${schema}/schema.prisma`, {
+      env: { ...process.env, [`${prefix}_DATABASE_URL`]: url, [`${prefix}_DIRECT_DATABASE_URL`]: url },
+      stdio: "pipe",
+    });
   }
   process.env.ORG_DATABASE_URL = urls.org;
   process.env.PERSONAL_DATABASE_URL = urls.personal;

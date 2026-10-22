@@ -73,12 +73,18 @@ npm run dev          # http://localhost:3000
 npm run build && npm start
 ```
 
+### Deploying
+
+To deploy on Vercel with a managed Postgres (Neon or Supabase), follow [docs/deploy-vercel.md](docs/deploy-vercel.md). `vercel.json` and `scripts/vercel-build.sh` set the build: production builds apply both migrations first, and preview builds never touch the production database.
+
 ## Environment variables
 
 | Variable | Purpose |
 | --- | --- |
-| `ORG_DATABASE_URL` | The `gr_org` role, `?schema=org`. |
-| `PERSONAL_DATABASE_URL` | The `gr_personal` role, `?schema=personal`. |
+| `ORG_DATABASE_URL` | The `gr_org` role, `?schema=org`. Pooled on a hosted database. |
+| `ORG_DIRECT_DATABASE_URL` | The same, unpooled, used for migrations. Locally, identical to `ORG_DATABASE_URL`. |
+| `PERSONAL_DATABASE_URL` | The `gr_personal` role, `?schema=personal`. Pooled on a hosted database. |
+| `PERSONAL_DIRECT_DATABASE_URL` | The same, unpooled, used for migrations. Locally, identical to `PERSONAL_DATABASE_URL`. |
 | `DATABASE_ADMIN_URL` | Superuser connection, used only by `db/setup.sql`, the reset script and the integration tests. Never by the app. |
 | `AUTH_SECRET` | Auth.js secret. Signs both auth instances' cookies, which have different names. |
 | `APP_ENCRYPTION_KEY` | 32 random bytes, base64. Encrypts the organization's AI key at rest. Never used for personal data. |
