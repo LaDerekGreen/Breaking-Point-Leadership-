@@ -1,0 +1,110 @@
+// Personal Gap Reader schema.
+//
+// This schema lives in the `personal` Postgres schema and is reached only with
+// the gr_personal role (PERSONAL_DATABASE_URL). It shares no table, user ID,
+// foreign key, view or join with prisma/org/schema.prisma.
+//
+// The server stores ciphertext only. Every record is encrypted in the user's
+// browser with AES-256-GCM under a key derived (PBKDF2-SHA-256) from the
+// user's own passphrase. The passphrase and the key never reach the server,
+// so neither the publisher nor any organization's administrators can read a
+// record. The user's own AI key is one of those encrypted records.
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../generated/personal"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("PERSONAL_DATABASE_URL")
+}
+
+enum Role {
+  personal_user
+}
+
+// ---------------------------------------------------------------------------
+// Auth.js tables (personal instance only)
+// ---------------------------------------------------------------------------
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  emailVerified DateTime?
+  image         String?
+  role          Role      @default(personal_user)
+  accounts      Account[]
+  sessions      Session[]
+  vault         Vault?
+  records       Record[]
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+// ---------------------------------------------------------------------------
+// Encrypted vault
+// ---------------------------------------------------------------------------
+
+/// Key derivation parameters and a verifier. The verifier is a known value
+/// encrypted under the derived key so the browser can check a passphrase.
+model Vault {
+  userId             String   @id
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  salt               String
+  iterations         Int
+  verifierIv         String
+  verifierCiphertext String
+  createdAt          DateTime @default(now())
+}
+
+/// One encrypted record. `kind` names the collection (log, plan, workbook,
+/// inquiry, settings) so the browser can fetch one collection at a time.
+model Record {
+  id         String   @id
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  kind       String
+  iv         String
+  ciphertext String
+  updatedAt  DateTime @updatedAt
+
+  @@index([userId, kind])
+}

@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+/* Calm, readable, plain. Contrast is WCAG AA or better in both themes. */
+:root {
+  --paper: #f7f5f0;
+  --card: #ffffff;
+  --ink: #1d2730;
+  --muted: #4a5763;
+  --line: #d9d4c7;
+  --accent: #1d4e5f;
+  --accent-ink: #ffffff;
+  --accent-soft: #e3eef0;
+  --warn: #7a3b00;
+  --warn-soft: #fbefd9;
+  --danger: #8a1c1c;
+  --danger-soft: #f8e3e3;
+  --focus: #b45309;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #14191d;
+    --card: #1c2329;
+    --ink: #e8ecef;
+    --muted: #b4bec6;
+    --line: #33404a;
+    --accent: #8cc5d6;
+    --accent-ink: #0d2229;
+    --accent-soft: #1f3540;
+    --warn: #f3c58a;
+    --warn-soft: #3a2a14;
+    --danger: #f2a8a8;
+    --danger-soft: #3b1d1d;
+    --focus: #fbbf24;
+  }
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", serif;
+}
+
+html { background: var(--paper); color: var(--ink); }
+body { background: var(--paper); color: var(--ink); font-family: var(--font-sans); line-height: 1.6; -webkit-text-size-adjust: 100%; }
+
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+
+.prose-plain p + p { margin-top: 0.75rem; }
+.skip-link { position: absolute; left: -9999px; }
+.skip-link:focus { left: 1rem; top: 1rem; z-index: 50; background: var(--card); padding: 0.5rem 1rem; }
+
+@media print {
+  header, footer, nav, .no-print { display: none !important; }
+  body { background: #fff; color: #000; }
+}
